@@ -1,0 +1,289 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "jjyiiuy/moonbit-orbit"
+
+import {
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn bi_elliptic_transfer_delta_v(Double, Double, Double, Double) -> Double
+
+pub fn circular_orbit(Double, Double) -> ClassicalElements
+
+pub fn circular_speed(Double, Double) -> Double
+
+pub fn clamp(Double, Double, Double) -> Double
+
+pub fn collect_visibility_windows(ArrayView[VisibilitySample]) -> Array[VisibilityWindow]
+
+pub fn combined_plane_change(Double, Double, Double) -> Double
+
+pub let deg_to_rad : Double
+
+pub fn degrees(Double) -> Double
+
+pub let earth_mu_km3_s2 : Double
+
+pub let earth_radius_km : Double
+
+pub let earth_rotation_rad_s : Double
+
+pub fn eccentric_anomaly_from_true(Double, Double) -> Double
+
+pub fn ecef_to_eci(Epoch, Vec3) -> Vec3
+
+pub fn ecef_to_geodetic_spherical(Vec3) -> Geodetic
+
+pub fn eci_to_ecef(Epoch, Vec3) -> Vec3
+
+pub fn elements_to_state(Double, ClassicalElements) -> StateVector
+
+pub fn escape_speed(Double, Double) -> Double
+
+pub fn geodetic_to_ecef(Geodetic) -> Vec3
+
+pub fn gmst(Epoch) -> Double
+
+pub let half_pi : Double
+
+pub fn hohmann_transfer(Double, Double, Double) -> HohmannTransfer
+
+pub fn is_line_of_sight_clear(Vec3, Vec3) -> Bool
+
+pub let j2 : Double
+
+pub fn j2_secular_rates(Double, Double, Double, ClassicalElements) -> J2Rates
+
+pub fn look_angle(Geodetic, Vec3) -> LookAngle
+
+pub fn look_angle_from_eci(Geodetic, Epoch, Vec3) -> LookAngle
+
+pub fn mean_anomaly_from_eccentric(Double, Double) -> Double
+
+pub fn mean_motion(Double, Double) -> Double
+
+pub fn mean_motion_rev_day_to_rad_s(Double) -> Double
+
+pub fn nearly_equal(Double, Double, Double) -> Bool
+
+pub fn normalize_angle(Double) -> Double
+
+pub fn orbital_period(Double, Double) -> Double
+
+pub fn parse_tle(String, String, String) -> Result[TleRecord, TleParseError]
+
+pub fn phasing_orbit_axis(Double, Double) -> Double
+
+pub let pi : Double
+
+pub fn plane_change(Double, Double) -> PlaneChange
+
+pub fn propagate_j2_mean_elements(Double, Double, Double, ClassicalElements, Double) -> ClassicalElements
+
+pub fn propagate_kepler(Double, ClassicalElements, Double) -> ClassicalElements
+
+pub let rad_to_deg : Double
+
+pub fn radians(Double) -> Double
+
+pub fn rotate_z(Vec3, Double) -> Vec3
+
+pub fn sample_kepler_visibility(Double, GroundStation, Epoch, ClassicalElements, Double, Int) -> Array[VisibilitySample]
+
+pub fn sample_visibility(GroundStation, Epoch, Vec3) -> VisibilitySample
+
+pub fn semi_latus_rectum(ClassicalElements) -> Double
+
+pub fn semi_major_axis_from_mean_motion(Double, Double) -> Double
+
+pub fn sgp4_status() -> Sgp4Status
+
+pub fn solve_kepler(Double, Double, tolerance? : Double, max_iterations? : Int) -> Double
+
+pub fn specific_orbital_energy(Double, Double) -> Double
+
+pub fn summarize_orbit(Double, ClassicalElements) -> OrbitSummary
+
+pub fn sun_synchronous_inclination(Double, Double, Double, Double, Double, Double) -> Double
+
+pub fn tle_to_mean_elements(Double, TleRecord) -> ClassicalElements
+
+pub fn topocentric(Geodetic, Vec3) -> Topocentric
+
+pub fn true_anomaly_from_eccentric(Double, Double) -> Double
+
+pub let two_pi : Double
+
+pub fn vis_viva_speed(Double, Double, Double) -> Double
+
+// Errors
+
+// Types and methods
+pub struct ClassicalElements {
+  semi_major_axis_km : Double
+  eccentricity : Double
+  inclination_rad : Double
+  raan_rad : Double
+  arg_periapsis_rad : Double
+  true_anomaly_rad : Double
+} derive(Eq, @debug.Debug)
+pub fn ClassicalElements::new(Double, Double, Double, Double, Double, Double) -> Self
+
+pub struct Epoch {
+  seconds_since_j2000 : Double
+} derive(Eq, @debug.Debug)
+pub fn Epoch::add_seconds(Self, Double) -> Self
+pub fn Epoch::days_since_j2000(Self) -> Double
+pub fn Epoch::duration_to(Self, Self) -> Double
+pub fn Epoch::from_days(Double) -> Self
+pub fn Epoch::from_seconds(Double) -> Self
+pub fn Epoch::j2000() -> Self
+
+pub struct EulerAngles {
+  roll_rad : Double
+  pitch_rad : Double
+  yaw_rad : Double
+} derive(Eq, @debug.Debug)
+
+pub struct Geodetic {
+  latitude_rad : Double
+  longitude_rad : Double
+  altitude_km : Double
+} derive(Eq, @debug.Debug)
+pub fn Geodetic::new(Double, Double, Double) -> Self
+
+pub struct GroundStation {
+  name : String
+  location : Geodetic
+  min_elevation_rad : Double
+} derive(Eq, @debug.Debug)
+pub fn GroundStation::new(String, Double, Double, altitude_km? : Double, min_elevation_rad? : Double) -> Self
+
+pub struct HohmannTransfer {
+  radius_initial_km : Double
+  radius_final_km : Double
+  semi_major_axis_km : Double
+  delta_v_departure_km_s : Double
+  delta_v_arrival_km_s : Double
+  delta_v_total_km_s : Double
+  time_of_flight_s : Double
+} derive(Eq, @debug.Debug)
+
+pub struct J2Rates {
+  raan_rate_rad_s : Double
+  arg_periapsis_rate_rad_s : Double
+  mean_anomaly_rate_rad_s : Double
+} derive(Eq, @debug.Debug)
+
+pub struct LookAngle {
+  azimuth_rad : Double
+  elevation_rad : Double
+  range_km : Double
+} derive(Eq, @debug.Debug)
+
+pub struct OrbitSummary {
+  radius_periapsis_km : Double
+  radius_apoapsis_km : Double
+  period_s : Double
+  mean_motion_rad_s : Double
+  specific_energy_km2_s2 : Double
+} derive(Eq, @debug.Debug)
+
+pub struct PlaneChange {
+  speed_km_s : Double
+  angle_rad : Double
+  delta_v_km_s : Double
+} derive(Eq, @debug.Debug)
+
+pub struct Quaternion {
+  w : Double
+  x : Double
+  y : Double
+  z : Double
+} derive(Eq, @debug.Debug)
+pub fn Quaternion::conjugate(Self) -> Self
+pub fn Quaternion::from_axis_angle(Vec3, Double) -> Self
+pub fn Quaternion::from_euler(EulerAngles) -> Self
+pub fn Quaternion::identity() -> Self
+pub fn Quaternion::multiply(Self, Self) -> Self
+pub fn Quaternion::new(Double, Double, Double, Double) -> Self
+pub fn Quaternion::norm(Self) -> Double
+pub fn Quaternion::norm_squared(Self) -> Double
+pub fn Quaternion::normalized(Self) -> Self
+pub fn Quaternion::rotate(Self, Vec3) -> Vec3
+pub fn Quaternion::to_euler(Self) -> EulerAngles
+
+pub struct Sgp4Status {
+  available : Bool
+  note : String
+} derive(Eq, @debug.Debug)
+
+pub struct StateVector {
+  position_km : Vec3
+  velocity_km_s : Vec3
+} derive(Eq, @debug.Debug)
+pub fn StateVector::new(Vec3, Vec3) -> Self
+
+pub(all) enum TleParseError {
+  LineTooShort(String)
+  InvalidNumber(String)
+  InvalidFormat(String)
+} derive(Eq, @debug.Debug)
+
+pub struct TleRecord {
+  name : String
+  satellite_number : Int
+  classification : Char
+  epoch_year : Int
+  epoch_day : Double
+  inclination_rad : Double
+  raan_rad : Double
+  eccentricity : Double
+  arg_periapsis_rad : Double
+  mean_anomaly_rad : Double
+  mean_motion_rev_day : Double
+  revolution_number : Int
+} derive(Eq, @debug.Debug)
+
+pub struct Topocentric {
+  east_km : Double
+  north_km : Double
+  up_km : Double
+} derive(Eq, @debug.Debug)
+
+pub struct Vec3 {
+  x : Double
+  y : Double
+  z : Double
+} derive(Eq, @debug.Debug)
+pub fn Vec3::add(Self, Self) -> Self
+pub fn Vec3::angle_between(Self, Self) -> Double
+pub fn Vec3::cross(Self, Self) -> Self
+pub fn Vec3::distance(Self, Self) -> Double
+pub fn Vec3::dot(Self, Self) -> Double
+pub fn Vec3::lerp(Self, Self, Double) -> Self
+pub fn Vec3::new(Double, Double, Double) -> Self
+pub fn Vec3::norm(Self) -> Double
+pub fn Vec3::norm_squared(Self) -> Double
+pub fn Vec3::scale(Self, Double) -> Self
+pub fn Vec3::sub(Self, Self) -> Self
+pub fn Vec3::unit(Self) -> Self
+pub fn Vec3::zero() -> Self
+
+pub struct VisibilitySample {
+  epoch : Epoch
+  look : LookAngle
+  visible : Bool
+} derive(Eq, @debug.Debug)
+
+pub struct VisibilityWindow {
+  start : Epoch
+  end : Epoch
+  max_elevation_rad : Double
+  closest_range_km : Double
+} derive(Eq, @debug.Debug)
+
+// Type aliases
+
+// Traits
+
