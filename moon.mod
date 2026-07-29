@@ -19,7 +19,7 @@ repository = "https://github.com/yhsrtty/moonbit-orbit"
 
 license = "Apache-2.0"
 
-keywords = ["orbital-mechanics", "aerospace", "mission-analysis", "moonbit"]
+keywords = [ "orbital-mechanics", "aerospace", "mission-analysis", "moonbit" ]
 
 preferred_target = "wasm-gc"
 

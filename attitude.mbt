@@ -19,12 +19,20 @@ pub fn Quaternion::identity() -> Quaternion {
 }
 
 ///|
-pub fn Quaternion::new(w : Double, x : Double, y : Double, z : Double) -> Quaternion {
+pub fn Quaternion::new(
+  w : Double,
+  x : Double,
+  y : Double,
+  z : Double,
+) -> Quaternion {
   { w, x, y, z }
 }
 
 ///|
-pub fn Quaternion::from_axis_angle(axis : Vec3, angle_rad : Double) -> Quaternion {
+pub fn Quaternion::from_axis_angle(
+  axis : Vec3,
+  angle_rad : Double,
+) -> Quaternion {
   let u = axis.unit()
   let half = angle_rad / 2.0
   let s = @math.sin(half)
@@ -95,7 +103,11 @@ pub fn Quaternion::to_euler(q : Quaternion) -> EulerAngles {
   let sinr_cosp = 2.0 * (n.w * n.x + n.y * n.z)
   let cosr_cosp = 1.0 - 2.0 * (n.x * n.x + n.y * n.y)
   let sinp = 2.0 * (n.w * n.y - n.z * n.x)
-  let pitch = if sinp.abs() >= 1.0 { sinp.signum() * half_pi } else { @math.asin(sinp) }
+  let pitch = if sinp.abs() >= 1.0 {
+    sinp.signum() * half_pi
+  } else {
+    @math.asin(sinp)
+  }
   let siny_cosp = 2.0 * (n.w * n.z + n.x * n.y)
   let cosy_cosp = 1.0 - 2.0 * (n.y * n.y + n.z * n.z)
   {

@@ -26,16 +26,20 @@ pub fn GroundStation::new(
   latitude_rad : Double,
   longitude_rad : Double,
   altitude_km? : Double = 0.0,
-  min_elevation_rad? : Double = radians(5.0)
+  min_elevation_rad? : Double = radians(5.0),
 ) -> GroundStation {
-  { name, location: Geodetic::new(latitude_rad, longitude_rad, altitude_km), min_elevation_rad }
+  {
+    name,
+    location: Geodetic::new(latitude_rad, longitude_rad, altitude_km),
+    min_elevation_rad,
+  }
 }
 
 ///|
 pub fn sample_visibility(
   station : GroundStation,
   epoch : Epoch,
-  satellite_eci_km : Vec3
+  satellite_eci_km : Vec3,
 ) -> VisibilitySample {
   let look = look_angle_from_eci(station.location, epoch, satellite_eci_km)
   { epoch, look, visible: look.elevation_rad >= station.min_elevation_rad }
@@ -48,7 +52,7 @@ pub fn sample_kepler_visibility(
   start : Epoch,
   elements : ClassicalElements,
   step_s : Double,
-  count : Int
+  count : Int,
 ) -> Array[VisibilitySample] {
   let samples : Array[VisibilitySample] = []
   for k in 0..<count {
@@ -61,7 +65,9 @@ pub fn sample_kepler_visibility(
 }
 
 ///|
-pub fn collect_visibility_windows(samples : ArrayView[VisibilitySample]) -> Array[VisibilityWindow] {
+pub fn collect_visibility_windows(
+  samples : ArrayView[VisibilitySample],
+) -> Array[VisibilityWindow] {
   let windows : Array[VisibilityWindow] = []
   let mut active = false
   let mut start = Epoch::j2000()
@@ -84,12 +90,22 @@ pub fn collect_visibility_windows(samples : ArrayView[VisibilitySample]) -> Arra
         min_range = sample.look.range_km
       }
     } else if active {
-      windows.push({ start, end, max_elevation_rad: max_el, closest_range_km: min_range })
+      windows.push({
+        start,
+        end,
+        max_elevation_rad: max_el,
+        closest_range_km: min_range,
+      })
       active = false
     }
   }
   if active {
-    windows.push({ start, end, max_elevation_rad: max_el, closest_range_km: min_range })
+    windows.push({
+      start,
+      end,
+      max_elevation_rad: max_el,
+      closest_range_km: min_range,
+    })
   }
   windows
 }

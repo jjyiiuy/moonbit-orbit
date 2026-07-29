@@ -20,7 +20,11 @@ pub struct LookAngle {
 } derive(Debug, Eq)
 
 ///|
-pub fn Geodetic::new(latitude_rad : Double, longitude_rad : Double, altitude_km : Double) -> Geodetic {
+pub fn Geodetic::new(
+  latitude_rad : Double,
+  longitude_rad : Double,
+  altitude_km : Double,
+) -> Geodetic {
   { latitude_rad, longitude_rad: normalize_angle(longitude_rad), altitude_km }
 }
 
@@ -70,21 +74,31 @@ pub fn topocentric(site : Geodetic, satellite_ecef_km : Vec3) -> Topocentric {
   let cos_lon = @math.cos(site.longitude_rad)
   {
     east_km: -sin_lon * rho.x + cos_lon * rho.y,
-    north_km: -sin_lat * cos_lon * rho.x - sin_lat * sin_lon * rho.y + cos_lat * rho.z,
-    up_km: cos_lat * cos_lon * rho.x + cos_lat * sin_lon * rho.y + sin_lat * rho.z,
+    north_km: -sin_lat * cos_lon * rho.x -
+    sin_lat * sin_lon * rho.y +
+    cos_lat * rho.z,
+    up_km: cos_lat * cos_lon * rho.x +
+    cos_lat * sin_lon * rho.y +
+    sin_lat * rho.z,
   }
 }
 
 ///|
 pub fn look_angle(site : Geodetic, satellite_ecef_km : Vec3) -> LookAngle {
   let topo = topocentric(site, satellite_ecef_km)
-  let range = (topo.east_km * topo.east_km + topo.north_km * topo.north_km + topo.up_km * topo.up_km).sqrt()
+  let range = (topo.east_km * topo.east_km +
+  topo.north_km * topo.north_km +
+  topo.up_km * topo.up_km).sqrt()
   let az = normalize_angle(@math.atan2(topo.east_km, topo.north_km))
   let el = @math.asin(clamp(topo.up_km / range, -1.0, 1.0))
   { azimuth_rad: az, elevation_rad: el, range_km: range }
 }
 
 ///|
-pub fn look_angle_from_eci(site : Geodetic, epoch : Epoch, satellite_eci_km : Vec3) -> LookAngle {
+pub fn look_angle_from_eci(
+  site : Geodetic,
+  epoch : Epoch,
+  satellite_eci_km : Vec3,
+) -> LookAngle {
   look_angle(site, eci_to_ecef(epoch, satellite_eci_km))
 }

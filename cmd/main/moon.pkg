@@ -1,7 +1,5 @@
 import {
-  "jjyiiuy/moonbit-orbit" @orbit
+  "jjyiiuy/moonbit-orbit" @orbit,
 }
 
-options(
-  "is-main": true,
-)
+pkgtype(kind: "executable")

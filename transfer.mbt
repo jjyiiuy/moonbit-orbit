@@ -27,12 +27,20 @@ pub fn escape_speed(mu : Double, radius_km : Double) -> Double {
 }
 
 ///|
-pub fn vis_viva_speed(mu : Double, radius_km : Double, semi_major_axis_km : Double) -> Double {
+pub fn vis_viva_speed(
+  mu : Double,
+  radius_km : Double,
+  semi_major_axis_km : Double,
+) -> Double {
   (mu * (2.0 / radius_km - 1.0 / semi_major_axis_km)).sqrt()
 }
 
 ///|
-pub fn hohmann_transfer(mu : Double, radius_initial_km : Double, radius_final_km : Double) -> HohmannTransfer {
+pub fn hohmann_transfer(
+  mu : Double,
+  radius_initial_km : Double,
+  radius_final_km : Double,
+) -> HohmannTransfer {
   let a_t = (radius_initial_km + radius_final_km) / 2.0
   let v1 = circular_speed(mu, radius_initial_km)
   let v2 = circular_speed(mu, radius_final_km)
@@ -56,13 +64,16 @@ pub fn bi_elliptic_transfer_delta_v(
   mu : Double,
   radius_initial_km : Double,
   radius_final_km : Double,
-  radius_intermediate_km : Double
+  radius_intermediate_km : Double,
 ) -> Double {
   let a1 = (radius_initial_km + radius_intermediate_km) / 2.0
   let a2 = (radius_final_km + radius_intermediate_km) / 2.0
-  let dv1 = (vis_viva_speed(mu, radius_initial_km, a1) - circular_speed(mu, radius_initial_km)).abs()
-  let dv2 = (vis_viva_speed(mu, radius_intermediate_km, a2) - vis_viva_speed(mu, radius_intermediate_km, a1)).abs()
-  let dv3 = (circular_speed(mu, radius_final_km) - vis_viva_speed(mu, radius_final_km, a2)).abs()
+  let dv1 = (vis_viva_speed(mu, radius_initial_km, a1) -
+  circular_speed(mu, radius_initial_km)).abs()
+  let dv2 = (vis_viva_speed(mu, radius_intermediate_km, a2) -
+  vis_viva_speed(mu, radius_intermediate_km, a1)).abs()
+  let dv3 = (circular_speed(mu, radius_final_km) -
+  vis_viva_speed(mu, radius_final_km, a2)).abs()
   dv1 + dv2 + dv3
 }
 
@@ -79,13 +90,11 @@ pub fn plane_change(speed_km_s : Double, angle_rad : Double) -> PlaneChange {
 pub fn combined_plane_change(
   speed_before_km_s : Double,
   speed_after_km_s : Double,
-  angle_rad : Double
+  angle_rad : Double,
 ) -> Double {
-  (
-    speed_before_km_s * speed_before_km_s +
-    speed_after_km_s * speed_after_km_s -
-    2.0 * speed_before_km_s * speed_after_km_s * @math.cos(angle_rad)
-  ).sqrt()
+  (speed_before_km_s * speed_before_km_s +
+  speed_after_km_s * speed_after_km_s -
+  2.0 * speed_before_km_s * speed_after_km_s * @math.cos(angle_rad)).sqrt()
 }
 
 ///|

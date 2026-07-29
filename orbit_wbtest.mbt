@@ -34,16 +34,33 @@ test "circular low earth orbit summary is plausible" {
 
 ///|
 test "element to state preserves circular radius and speed" {
-  let elements = ClassicalElements::new(7000.0, 0.0, radians(28.5), radians(40.0), 0.0, radians(90.0))
+  let elements = ClassicalElements::new(
+    7000.0,
+    0.0,
+    radians(28.5),
+    radians(40.0),
+    0.0,
+    radians(90.0),
+  )
   let state = elements_to_state(earth_mu_km3_s2, elements)
   assert_close(state.position_km.norm(), 7000.0, 1.0e-8)
-  assert_close(state.velocity_km_s.norm(), circular_speed(earth_mu_km3_s2, 7000.0), 1.0e-10)
+  assert_close(
+    state.velocity_km_s.norm(),
+    circular_speed(earth_mu_km3_s2, 7000.0),
+    1.0e-10,
+  )
 }
 
 ///|
 test "hohmann transfer from leo to geo sized orbit" {
-  let transfer = hohmann_transfer(earth_mu_km3_s2, earth_radius_km + 300.0, 42164.0)
-  assert_true(transfer.delta_v_total_km_s > 3.8 && transfer.delta_v_total_km_s < 4.0)
+  let transfer = hohmann_transfer(
+    earth_mu_km3_s2,
+    earth_radius_km + 300.0,
+    42164.0,
+  )
+  assert_true(
+    transfer.delta_v_total_km_s > 3.8 && transfer.delta_v_total_km_s < 4.0,
+  )
   assert_true(transfer.time_of_flight_s > 18000.0)
 }
 
@@ -59,7 +76,11 @@ test "ground station sees overhead satellite" {
   let station = GroundStation::new("equator", 0.0, 0.0, min_elevation_rad=0.0)
   let site = geodetic_to_ecef(station.location)
   let sat = site.unit().scale(earth_radius_km + 500.0)
-  let sample = sample_visibility(station, Epoch::j2000(), ecef_to_eci(Epoch::j2000(), sat))
+  let sample = sample_visibility(
+    station,
+    Epoch::j2000(),
+    ecef_to_eci(Epoch::j2000(), sat),
+  )
   assert_true(sample.visible)
   assert_close(sample.look.elevation_rad, half_pi, 1.0e-8)
 }
@@ -71,7 +92,10 @@ test "tle parser extracts mean elements" {
   match parse_tle("ISS", line1, line2) {
     Ok(tle) => {
       let elements = tle_to_mean_elements(earth_mu_km3_s2, tle)
-      assert_true(elements.semi_major_axis_km > 6700.0 && elements.semi_major_axis_km < 6900.0)
+      assert_true(
+        elements.semi_major_axis_km > 6700.0 &&
+        elements.semi_major_axis_km < 6900.0,
+      )
       assert_close(tle.eccentricity, 0.0006703, 1.0e-10)
     }
     Err(e) => fail("unexpected TLE error: \{to_repr(e)}")
@@ -80,7 +104,14 @@ test "tle parser extracts mean elements" {
 
 ///|
 test "j2 rates are finite for sun synchronous class orbit" {
-  let elements = ClassicalElements::new(earth_radius_km + 700.0, 0.001, radians(98.0), 0.0, 0.0, 0.0)
+  let elements = ClassicalElements::new(
+    earth_radius_km + 700.0,
+    0.001,
+    radians(98.0),
+    0.0,
+    0.0,
+    0.0,
+  )
   let rates = j2_secular_rates(earth_mu_km3_s2, earth_radius_km, j2, elements)
   assert_true(!rates.raan_rate_rad_s.is_nan())
   assert_true(rates.mean_anomaly_rate_rad_s > 0.0)
