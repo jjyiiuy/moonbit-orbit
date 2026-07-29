@@ -7,7 +7,7 @@ This file is kept in the repository so the submission state can be reviewed with
 - Project id: `moonbit-orbit`
 - MoonBit module: `jjyiiuy/moonbit-orbit`
 - License: Apache-2.0
-- Default branch target: `main`
+- Default branch: GitHub uses `main`; GitLink uses the platform-created `master` branch for the mirrored competition repository.
 - Source scale at local check: 5,643 MoonBit source lines
 - Contributor policy: one real repository owner account only; no fictional contributor identity is listed
 
