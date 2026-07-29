@@ -35,5 +35,7 @@ pub fn Epoch::days_since_j2000(epoch : Epoch) -> Double {
 
 ///|
 pub fn gmst(epoch : Epoch) -> Double {
-  normalize_angle(4.894961212823756 + earth_rotation_rad_s * epoch.seconds_since_j2000)
+  normalize_angle(
+    4.894961212823756 + earth_rotation_rad_s * epoch.seconds_since_j2000,
+  )
 }

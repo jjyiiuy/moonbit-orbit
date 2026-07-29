@@ -113,15 +113,21 @@ fn parse_double_field(s : String) -> Result[Double, TleParseError] {
 }
 
 ///|
-pub fn parse_tle(name : String, line1 : String, line2 : String) -> Result[TleRecord, TleParseError] {
+pub fn parse_tle(
+  name : String,
+  line1 : String,
+  line2 : String,
+) -> Result[TleRecord, TleParseError] {
   if line1.length() < 63 {
     return Err(TleParseError::LineTooShort("line1"))
   }
   if line2.length() < 63 {
     return Err(TleParseError::LineTooShort("line2"))
   }
-  if !(line1 is [.."1 ", ..]) || !(line2 is [.."2 ", ..]) {
-    return Err(TleParseError::InvalidFormat("TLE lines must start with 1 and 2"))
+  if !(line1 is [.. "1 ", ..]) || !(line2 is [.. "2 ", ..]) {
+    return Err(
+      TleParseError::InvalidFormat("TLE lines must start with 1 and 2"),
+    )
   }
   let sat1 = match parse_int_field(slice_text(line1, 2, 7)) {
     Ok(v) => v
@@ -198,7 +204,10 @@ pub fn mean_motion_rev_day_to_rad_s(mean_motion_rev_day : Double) -> Double {
 }
 
 ///|
-pub fn semi_major_axis_from_mean_motion(mu : Double, mean_motion_rev_day : Double) -> Double {
+pub fn semi_major_axis_from_mean_motion(
+  mu : Double,
+  mean_motion_rev_day : Double,
+) -> Double {
   let n = mean_motion_rev_day_to_rad_s(mean_motion_rev_day)
   @math.pow(mu / (n * n), 1.0 / 3.0)
 }
