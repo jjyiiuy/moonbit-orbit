@@ -1,0 +1,7 @@
+import {
+  "jjyiiuy/moonbit-orbit" @orbit
+}
+
+options(
+  "is-main": true,
+)
