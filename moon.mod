@@ -15,7 +15,7 @@ version = "0.1.0"
 
 readme = "README.mbt.md"
 
-repository = "https://github.com/yhsrtty/moonbit-orbit"
+repository = "https://github.com/jjyiiuy/moonbit-orbit"
 
 license = "Apache-2.0"
 
