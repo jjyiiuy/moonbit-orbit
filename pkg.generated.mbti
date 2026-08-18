@@ -6,21 +6,227 @@ import {
 }
 
 // Values
+pub const SunEarthDistanceKm : Double = 149597870.7
+
+pub const SunRadiusKm : Double = 695700.0
+
+pub const Wgs84A : Double = 6378.137
+
+pub const Wgs84B : Double = 6356.75231425
+
+pub const Wgs84E2 : Double = 0.00669437999014
+
+pub const Wgs84F : Double = 0.00335281066475
+
+pub fn acceleration(AccelerationModel, StateVector) -> Vec3
+
+pub fn accumulate_budgets(Array[DeltaVBudget]) -> DeltaVBudget
+
+pub fn all_mission_event_kinds() -> Array[MissionEventKind]
+
+pub fn all_operation_modes() -> Array[OperationMode]
+
+pub fn all_validation_levels() -> Array[ValidationLevel]
+
+pub fn altitude_is_valid(ClassicalElements, Double, Double) -> Bool
+
+pub fn analysis_is_valid(OrbitAnalysis) -> Bool
+
+pub fn analyze_orbit(Double, ClassicalElements) -> OrbitAnalysis
+
+pub fn angular_momentum(AttitudeState, Vec3) -> Vec3
+
+pub fn angular_radius(Double, Double) -> Double
+
+pub fn anomaly_grid(ClassicalElements, Int) -> Array[ClassicalElements]
+
+pub fn antenna_link_margin_db(Double, Double, Double, Double, Double) -> Double
+
+pub fn apply_horizon_mask(LookAngle, Array[Double]) -> Bool
+
+pub fn approximate_sunrise(Geodetic, Epoch) -> Double
+
+pub fn approximate_sunset(Geodetic, Epoch) -> Double
+
+pub fn arcseconds_to_radians(Double) -> Double
+
+pub fn ascending_node_longitude(Array[GroundTrackPoint]) -> Double
+
+pub fn assess_orbit(ClassicalElements) -> Array[String]
+
+pub fn atmospheric_reentry_altitude_km() -> Double
+
+pub fn attitude_error(Quaternion, Quaternion) -> Quaternion
+
+pub fn attitude_health(Double, Double) -> HealthFlag
+
+pub fn attitude_propagate(AttitudeState, Double) -> AttitudeState
+
+pub fn au_to_kilometers(Double) -> Double
+
+pub fn azimuth_rate(LookAngle, LookAngle, Double) -> Double
+
+pub fn ballistic_coefficient(Double, Double, Double) -> Double
+
+pub fn bar_to_pascal(Double) -> Double
+
+pub fn battery_energy_wh(Double, Double, Double) -> Double
+
+pub fn benchmark_geodesy(Int) -> BenchmarkResult
+
+pub fn benchmark_kepler(Int) -> BenchmarkResult
+
+pub fn benchmark_report(Int) -> Array[BenchmarkResult]
+
+pub fn benchmark_report_text(Array[BenchmarkResult]) -> String
+
+pub fn benchmark_state_conversion(Int) -> BenchmarkResult
+
+pub fn best_launch_window(Array[LaunchWindow]) -> LaunchWindow?
+
+pub fn beta_angle(Vec3, Vec3) -> Double
+
 pub fn bi_elliptic_transfer_delta_v(Double, Double, Double, Double) -> Double
+
+pub fn bisect((Double) -> Double, Double, Double, tolerance? : Double, max_iterations? : Int) -> RootResult
+
+pub fn blackbody_flux(Double) -> Double
+
+pub fn body_rate_limit(Vec3, Double) -> Vec3
+
+pub fn bounding_box(Array[Vec3]) -> (Vec3, Vec3)
+
+pub fn bounding_box_center(Array[Vec3]) -> Vec3
+
+pub fn bounding_box_diagonal(Array[Vec3]) -> Double
+
+pub fn budget_is_exceeded(DeltaVBudget, Double) -> Bool
+
+pub fn budget_is_valid(DeltaVBudget) -> Bool
+
+pub fn budget_remaining(DeltaVBudget, Double) -> Double
+
+pub fn cartesian_to_spherical(Vec3) -> (Double, Double, Double)
+
+pub fn catalog_active_fraction(Array[CatalogEntry]) -> Double
+
+pub fn catalog_altitude_km(CatalogEntry) -> Double
+
+pub fn catalog_altitude_stats(Array[CatalogEntry]) -> SampleStats
+
+pub fn catalog_density(Array[CatalogEntry], Double) -> Array[Int]
+
+pub fn catalog_matches(CatalogQuery, CatalogEntry) -> Bool
+
+pub fn catalog_merge(Array[CatalogEntry], Array[CatalogEntry]) -> Array[CatalogEntry]
+
+pub fn catalog_names(Array[CatalogEntry]) -> Array[String]
+
+pub fn catalog_period_stats(Array[CatalogEntry]) -> SampleStats
+
+pub fn celsius_to_fahrenheit(Double) -> Double
+
+pub fn celsius_to_kelvin(Double) -> Double
+
+pub fn centimeters_to_meters(Double) -> Double
+
+pub fn central_acceleration(Double, Vec3) -> Vec3
+
+pub fn centroid(Array[Vec3]) -> Vec3
 
 pub fn circular_orbit(Double, Double) -> ClassicalElements
 
 pub fn circular_speed(Double, Double) -> Double
 
+pub fn circularize_cost(Double, Double, Double) -> Double
+
 pub fn clamp(Double, Double, Double) -> Double
+
+pub fn clamp_unit(Double) -> Double
+
+pub fn closest_approach(StateVector, StateVector) -> SafetyAssessment
+
+pub fn closest_points_on_lines(Vec3, Vec3, Vec3, Vec3) -> (Vec3, Vec3)
 
 pub fn collect_visibility_windows(ArrayView[VisibilitySample]) -> Array[VisibilityWindow]
 
+pub fn collision_probability_proxy(Double, Double) -> Double
+
 pub fn combined_plane_change(Double, Double, Double) -> Double
+
+pub fn combined_plane_change_delta_v(Double, Double, Double) -> Double
+
+pub fn command_is_valid(ControlCommand) -> Bool
+
+pub fn command_is_within_tolerance(ControlCommand, Double) -> Bool
+
+pub fn communication_health(Double, Double) -> HealthFlag
+
+pub fn conjunction_screen(StateVector, Array[StateVector], Double) -> Array[SafetyAssessment]
+
+pub fn contact_capacity(Double, Double, LinkBudget) -> ContactCapacity
+
+pub fn contact_data_volume_mb(Double, Double) -> Double
+
+pub fn contact_event(Double, String, Double) -> MissionEvent
+
+pub fn contingency_step(Int, String, Double, Double) -> OperationStep
+
+pub fn control_command(Quaternion, PointingTarget, Vec3, Double) -> ControlCommand
+
+pub fn convert_unit(Double, String, String) -> Double
+
+pub fn correlation(Array[Double], Array[Double]) -> Double
+
+pub fn covariance(Array[Double], Array[Double]) -> Double
+
+pub fn coverage_cells_for_track(Array[GroundTrackPoint], Double, Double) -> Int
+
+pub fn coverage_grid(Double, Double) -> Array[Geodetic]
+
+pub fn coverage_report(GroundStation, Array[GroundTrackPoint], Epoch, ClassicalElements, Double) -> CoverageReport
+
+pub fn cubic_meters_to_liters(Double) -> Double
+
+pub fn cumulative_maximum(Array[Double]) -> Array[Double]
+
+pub fn cumulative_sum(Array[Double]) -> Array[Double]
+
+pub fn cylindrical_eclipse(Vec3, Vec3, Double) -> EclipseResult
+
+pub fn daylight_fraction(EclipseResult) -> Double
+
+pub fn days_to_seconds(Double) -> Double
+
+pub fn db_to_linear(Double) -> Double
+
+pub fn dbw_to_watts(Double) -> Double
+
+pub fn decibels_to_ratio(Double) -> Double
+
+pub fn deg_per_second_to_rad_per_second(Double) -> Double
 
 pub let deg_to_rad : Double
 
 pub fn degrees(Double) -> Double
+
+pub fn degrees_to_radians(Double) -> Double
+
+pub fn denormalize_parameter(Double, Double, Double) -> Double
+
+pub fn desaturation_delta_v(Vec3, Vec3, Vec3) -> Vec3
+
+pub fn destination_point(Geodetic, Double, Double) -> Geodetic
+
+pub fn detect_step_changes(Array[TelemetrySample], Double) -> Array[TelemetrySample]
+
+pub fn doppler_corrected_frequency(Double, Double) -> Double
+
+pub fn doppler_shift_hz(Double, Double) -> Double
+
+pub fn drag_acceleration(AccelerationModel, Vec3, Vec3) -> Vec3
+
+pub fn dynamic_pressure(Double, Double) -> Double
 
 pub let earth_mu_km3_s2 : Double
 
@@ -30,33 +236,257 @@ pub let earth_rotation_rad_s : Double
 
 pub fn eccentric_anomaly_from_true(Double, Double) -> Double
 
+pub fn eccentricity_is_valid(ClassicalElements, Double) -> Bool
+
+pub fn ecef_distance_km(Vec3, Vec3) -> Double
+
 pub fn ecef_to_eci(Epoch, Vec3) -> Vec3
 
 pub fn ecef_to_geodetic_spherical(Vec3) -> Geodetic
 
+pub fn ecef_to_geodetic_wgs84(Vec3) -> Geodetic
+
 pub fn eci_to_ecef(Epoch, Vec3) -> Vec3
+
+pub fn eclipse_geometry(Vec3, Vec3, Double, Double) -> EclipseResult
+
+pub fn eclipse_is_partial(EclipseResult) -> Bool
+
+pub fn eclipse_is_total(EclipseResult) -> Bool
+
+pub fn eclipse_margin_rad(EclipseResult) -> Double
+
+pub fn effective_data_rate(Double, Double) -> Double
 
 pub fn elements_to_state(Double, ClassicalElements) -> StateVector
 
+pub fn elevation_rate(LookAngle, LookAngle, Double) -> Double
+
+pub fn enu_coordinates(Geodetic, Vec3) -> Vec3
+
 pub fn escape_speed(Double, Double) -> Double
+
+pub fn escape_velocity(Double, Double) -> Double
+
+pub fn estimate_eclipse_duration(Double, Double, Double) -> Double
+
+pub fn estimate_orbit_pass(GroundStation, ClassicalElements, Epoch, Double, Double, Double) -> Array[PassWindow]
+
+pub fn euler_to_quaternion(EulerAngles) -> Quaternion
+
+pub fn evaluate_design(Double, ClassicalElements, DesignConstraint) -> DesignCandidate
+
+pub fn evaluate_launch_window(Double, Double, Double, Double) -> LaunchWindow
+
+pub fn exponential_density_kg_m3(Double, Double) -> Double
+
+pub fn fahrenheit_to_celsius(Double) -> Double
+
+pub fn feasible_designs(Array[DesignCandidate]) -> Array[DesignCandidate]
+
+pub fn filter_catalog(Array[CatalogEntry], CatalogQuery) -> Array[CatalogEntry]
+
+pub fn find_bracket((Double) -> Double, Double, Double, samples? : Int) -> (Double, Double)?
+
+pub fn find_catalog_entry(Array[CatalogEntry], String) -> CatalogEntry?
+
+pub fn find_equator_crossings(Array[GroundTrackPoint]) -> Array[GroundTrackPoint]
+
+pub fn finite_difference(Array[Double], Double) -> Array[Double]
+
+pub fn finite_difference_gradient((Array[Double]) -> Double, Array[Double], Double) -> Array[Double]
+
+pub fn finite_or(Double, Double) -> Double
+
+pub fn flight_path_angle(StateVector) -> Double
+
+pub fn format_duration_seconds(Double) -> String
+
+pub fn fraction_to_percent(Double) -> Double
+
+pub fn free_space_path_loss_db(Double, Double) -> Double
+
+pub fn geodesic_surface_distance_km(Geodetic, Geodetic) -> Double
+
+pub fn geodetic_height_above_ellipsoid(Geodetic) -> Double
 
 pub fn geodetic_to_ecef(Geodetic) -> Vec3
 
+pub fn geodetic_to_ecef_wgs84(Geodetic) -> Vec3
+
 pub fn gmst(Epoch) -> Double
+
+pub fn gradient_descent((Array[Double]) -> Double, Array[Double], Double, Int) -> OptimizationResult
+
+pub fn great_circle_angle(Vec3, Vec3) -> Double
+
+pub fn great_circle_arc_length(Double, Vec3, Vec3) -> Double
+
+pub fn grid_search_1d((Double) -> Double, Double, Double, Int) -> (Double, Double)
+
+pub fn ground_track(Double, ClassicalElements, Epoch, Double, Double) -> Array[GroundTrackPoint]
 
 pub let half_pi : Double
 
+pub fn health_flag(String, Double, Double, Double) -> HealthFlag
+
+pub fn health_flags(Array[(String, Double)], Double, Double) -> Array[HealthFlag]
+
+pub fn health_is_nominal(Array[HealthFlag]) -> Bool
+
+pub fn health_is_valid(HealthFlag) -> Bool
+
+pub fn health_margin(HealthFlag) -> Double
+
+pub fn health_score(Array[HealthFlag]) -> Double
+
+pub fn health_summary(Array[HealthFlag]) -> String
+
+pub fn health_worst_margin(Array[HealthFlag]) -> Double
+
+pub fn healthy_fraction(Array[HealthFlag]) -> Double
+
+pub fn hertz_to_period_seconds(Double) -> Double
+
+pub fn histogram(Array[Double], Double, Double, Int) -> Histogram
+
+pub fn histogram_is_valid(Histogram) -> Bool
+
+pub fn hohmann_like_lambert(Double, Vec3, Vec3, Double) -> LambertSolution
+
 pub fn hohmann_transfer(Double, Double, Double) -> HohmannTransfer
+
+pub fn horizon_mask_elevation(Double, Array[Double]) -> Double
+
+pub fn hours_to_seconds(Double) -> Double
+
+pub fn impulse_magnitude(Vec3) -> Double
+
+pub fn inches_to_meters(Double) -> Double
+
+pub fn inclination_change_cost(Double, Double, Double, Double) -> Double
+
+pub fn inclination_is_valid(ClassicalElements, Double, Double) -> Bool
+
+pub fn inertial_to_perifocal(ClassicalElements, Vec3) -> Vec3
+
+pub fn initial_bearing_rad(Geodetic, Geodetic) -> Double
+
+pub fn integrate_dynamics(AccelerationModel, StateVector, Double, Double) -> Array[DynamicsState]
+
+pub fn integrate_simpson(Array[Double], Double) -> Double
+
+pub fn integrate_trapezoid(Array[Double], Array[Double]) -> Double
+
+pub fn integrate_uniform(Array[Double], Double) -> Double
+
+pub fn interpolate_angle(Array[Double], Array[Double], Double) -> Double
+
+pub fn interpolate_array(Array[Double], Array[Double], Double) -> Double
+
+pub fn interpolate_direction(Vec3, Vec3, Double) -> Vec3
+
+pub fn interpolate_state(StateVector, StateVector, Double) -> StateVector
+
+pub fn inverse_lerp(Double, Double, Double) -> Double
+
+pub fn is_close(Double, Double, absolute? : Double, relative? : Double) -> Bool
+
+pub fn is_collision_risk(SafetyAssessment, Double) -> Bool
 
 pub fn is_line_of_sight_clear(Vec3, Vec3) -> Bool
 
+pub fn is_reentry_risk(ClassicalElements) -> Bool
+
 pub let j2 : Double
 
+pub fn j2_acceleration(Double, Double, Double, Vec3) -> Vec3
+
 pub fn j2_secular_rates(Double, Double, Double, ClassicalElements) -> J2Rates
+
+pub fn joules_to_kilowatt_hours(Double) -> Double
+
+pub fn joules_to_watt_hours(Double) -> Double
+
+pub fn kelvin_to_celsius(Double) -> Double
+
+pub fn kilograms_force_to_newtons(Double) -> Double
+
+pub fn kilograms_to_pounds(Double) -> Double
+
+pub fn kilometers_per_second_to_meters_per_second(Double) -> Double
+
+pub fn kilometers_to_au(Double) -> Double
+
+pub fn kilometers_to_meters(Double) -> Double
+
+pub fn kilometers_to_miles(Double) -> Double
+
+pub fn kilowatt_hours_to_joules(Double) -> Double
+
+pub fn kinetic_rotation_energy(AttitudeState, Vec3) -> Double
+
+pub fn knots_to_meters_per_second(Double) -> Double
+
+pub fn lambert_delta_v(LambertSolution, Vec3, Vec3) -> (Double, Double, Double)
+
+pub fn lambert_universal(Double, Vec3, Vec3, Double, prograde? : Bool, max_iterations? : Int) -> LambertSolution
+
+pub fn launch_azimuth(Double, Double) -> Double
+
+pub fn launch_window_sequence(Double, Int, Double, Double, Double) -> Array[LaunchWindow]
+
+pub fn lerp_scalar(Double, Double, Double) -> Double
+
+pub fn lifetime_margin_days(Double, Double) -> Double
+
+pub fn light_time_s(Double) -> Double
+
+pub fn line_of_sight(Vec3, Vec3, Double) -> Bool
+
+pub fn line_point_distance(Vec3, Vec3, Vec3) -> Double
+
+pub fn linear_regression(Array[Double], Array[Double]) -> LinearRegression
+
+pub fn linear_to_db(Double) -> Double
+
+pub fn link_availability(Array[Double], Double) -> Double
+
+pub fn link_budget(Double, Double, Double, Double, Double, Double) -> LinkBudget
+
+pub fn link_is_usable(LinkBudget, Double) -> Bool
+
+pub fn link_is_valid(LinkBudget) -> Bool
+
+pub fn liters_to_cubic_meters(Double) -> Double
+
+pub fn local_frame(Geodetic) -> LocalFrame
+
+pub fn local_gravity_m_s2(Double, Double) -> Double
+
+pub fn local_ned(Geodetic, Vec3) -> Vec3
+
+pub fn longitude_difference_rad(Double, Double) -> Double
+
+pub fn longitude_span(Array[GroundTrackPoint]) -> Double
 
 pub fn look_angle(Geodetic, Vec3) -> LookAngle
 
 pub fn look_angle_from_eci(Geodetic, Epoch, Vec3) -> LookAngle
+
+pub fn mach_number(Double, Double) -> Double
+
+pub fn make_delta_v_budget(Double, reserve_fraction? : Double) -> DeltaVBudget
+
+pub fn make_pointing_target(Vec3, Double, Double) -> PointingTarget
+
+pub fn maneuver_event(Double, String, Double) -> MissionEvent
+
+pub fn maximum_latitude(Array[GroundTrackPoint]) -> Double
+
+pub fn mean(Array[Double]) -> Double
+
+pub fn mean_altitude(Array[GroundTrackPoint]) -> Double
 
 pub fn mean_anomaly_from_eccentric(Double, Double) -> Double
 
@@ -64,33 +494,325 @@ pub fn mean_motion(Double, Double) -> Double
 
 pub fn mean_motion_rev_day_to_rad_s(Double) -> Double
 
+pub fn meridian_radius_km(Double) -> Double
+
+pub fn meters_per_second_to_kilometers_per_second(Double) -> Double
+
+pub fn meters_per_second_to_knots(Double) -> Double
+
+pub fn meters_to_centimeters(Double) -> Double
+
+pub fn meters_to_inches(Double) -> Double
+
+pub fn meters_to_kilometers(Double) -> Double
+
+pub fn meters_to_millimeters(Double) -> Double
+
+pub fn metric_is_valid(TrajectoryMetrics) -> Bool
+
+pub fn miles_to_kilometers(Double) -> Double
+
+pub fn millimeters_to_meters(Double) -> Double
+
+pub fn minimize_delta_v(Double, Array[Double]) -> (Double, Double)
+
+pub fn minutes_to_seconds(Double) -> Double
+
+pub fn mission_energy_proxy(Double, ClassicalElements, Double) -> Double
+
+pub fn mission_event_count(MissionTimeline, MissionEventKind) -> Int
+
+pub fn mission_event_kind_name(MissionEventKind) -> String
+
+pub fn mission_report(MissionTimeline, DeltaVBudget) -> OrbitReport
+
+pub fn mission_success_probability(Array[Double]) -> Double
+
+pub fn moon_altitude(Geodetic, Epoch) -> Double
+
+pub fn moon_position(Epoch) -> MoonPosition
+
+pub fn moving_average(Array[Double], Int) -> Array[Double]
+
+pub fn navigation_health(Double, Double) -> HealthFlag
+
+pub fn nearest_index(Array[Double], Double) -> Int
+
+pub fn nearest_value(Array[Double], Double) -> Double
+
 pub fn nearly_equal(Double, Double, Double) -> Bool
+
+pub fn newton((Double) -> Double, (Double) -> Double, Double, tolerance? : Double, max_iterations? : Int) -> RootResult
+
+pub fn newtons_to_kilograms_force(Double) -> Double
+
+pub fn noise_from_density(Double, Double) -> Double
+
+pub fn nominal_step(Int, String, Double, Double) -> OperationStep
 
 pub fn normalize_angle(Double) -> Double
 
+pub fn normalize_angle_degrees(Double) -> Double
+
+pub fn normalize_parameter(Double, Double, Double) -> Double
+
+pub fn normalize_series(Array[Double]) -> Array[Double]
+
+pub fn normalize_time_of_day_seconds(Double) -> Double
+
+pub fn normalize_weights(Array[Double]) -> Array[Double]
+
+pub fn objective_orbit_altitude(Double, ClassicalElements, Double) -> Double
+
+pub fn orbit_eccentricity_limit(ClassicalElements) -> Double
+
+pub fn orbit_intersects_body(ClassicalElements, Double) -> Bool
+
+pub fn orbit_is_valid(ClassicalElements) -> Bool
+
+pub fn orbit_report(Double, ClassicalElements) -> OrbitReport
+
+pub fn orbit_state_angular_momentum(StateVector) -> Double
+
+pub fn orbit_state_energy(Double, StateVector) -> Double
+
 pub fn orbital_period(Double, Double) -> Double
+
+pub fn orthogonal_basis(Vec3) -> (Vec3, Vec3)
+
+pub fn outliers(Array[Double], Double) -> Array[Double]
+
+pub fn packet_error_rate(Double, Double) -> Double
+
+pub fn pareto_front(Array[(Double, Double)]) -> Array[(Double, Double)]
 
 pub fn parse_tle(String, String, String) -> Result[TleRecord, TleParseError]
 
+pub fn pascal_to_bar(Double) -> Double
+
+pub fn pascal_to_psi(Double) -> Double
+
+pub fn pass_is_valid(PassWindow) -> Bool
+
+pub fn payload_data_generated(ResourceProfile, Double) -> Double
+
+pub fn percent_to_fraction(Double) -> Double
+
+pub fn percentile(Array[Double], Double) -> Double
+
+pub fn perifocal_to_inertial(ClassicalElements, Vec3) -> Vec3
+
+pub fn perigee_apogee(ClassicalElements) -> PerigeeApogee
+
+pub fn period_is_valid(ClassicalElements, Double, Double) -> Bool
+
+pub fn period_seconds_to_hertz(Double) -> Double
+
+pub fn phasing_delta_v(Double, Double, Double, Int) -> Double
+
 pub fn phasing_orbit_axis(Double, Double) -> Double
+
+pub fn photon_energy(Double) -> Double
 
 pub let pi : Double
 
 pub fn plane_change(Double, Double) -> PlaneChange
 
+pub fn plane_change_delta_v(Double, Double) -> Double
+
+pub fn pointing_error(Quaternion, PointingTarget, Vec3) -> Double
+
+pub fn polynomial(Array[Double], Double) -> Double
+
+pub fn polynomial_derivative(Array[Double], Double) -> Double
+
+pub fn polynomial_fit_linear(Array[Double], Array[Double]) -> (Double, Double)
+
+pub fn pounds_to_kilograms(Double) -> Double
+
+pub fn predict_linear((Double, Double), Double) -> Double
+
+pub fn prime_vertical_radius_km(Double) -> Double
+
+pub fn profile_maximum(Array[Double]) -> Double
+
+pub fn profile_minimum(Array[Double]) -> Double
+
+pub fn profile_range(Array[Double]) -> Double
+
+pub fn project_onto(Vec3, Vec3) -> Vec3
+
+pub fn project_to_plane(Vec3, Vec3) -> Vec3
+
+pub fn propagate_catalog(Array[CatalogEntry], Double) -> Array[CatalogEntry]
+
 pub fn propagate_j2_mean_elements(Double, Double, Double, ClassicalElements, Double) -> ClassicalElements
 
 pub fn propagate_kepler(Double, ClassicalElements, Double) -> ClassicalElements
 
+pub fn propellant_mass_from_delta_v(Double, Double, Double) -> Double
+
+pub fn propulsion_health(Double, Double) -> HealthFlag
+
+pub fn psi_to_pascal(Double) -> Double
+
+pub fn quantize(Double, Double) -> Double
+
+pub fn quaternion_command_error(Quaternion, Quaternion) -> Vec3
+
+pub fn quaternion_distance(Quaternion, Quaternion) -> Double
+
+pub fn quaternion_slerp(Quaternion, Quaternion, Double) -> Quaternion
+
+pub fn quaternion_to_euler(Quaternion) -> EulerAngles
+
+pub fn rad_per_second_to_deg_per_second(Double) -> Double
+
+pub fn rad_per_second_to_revolutions_per_day(Double) -> Double
+
 pub let rad_to_deg : Double
+
+pub fn radial_profile(Double, ClassicalElements, Int) -> Array[Double]
+
+pub fn radial_transverse_normal(Vec3, Vec3) -> (Vec3, Vec3, Vec3)
+
+pub fn radial_velocity(StateVector) -> Double
 
 pub fn radians(Double) -> Double
 
+pub fn radians_to_arcseconds(Double) -> Double
+
+pub fn radians_to_degrees(Double) -> Double
+
+pub fn range_rate(StateVector, StateVector) -> Double
+
+pub fn rank_designs(Array[DesignCandidate]) -> Array[DesignCandidate]
+
+pub fn ratio_to_decibels(Double) -> Double
+
+pub fn reaction_wheel_momentum(Vec3, Vec3) -> Vec3
+
+pub fn refine_pass_peak(GroundStation, ClassicalElements, Epoch, Double, Double, Double) -> Double
+
+pub fn reflect(Vec3, Vec3) -> Vec3
+
+pub fn regression_is_valid(LinearRegression) -> Bool
+
+pub fn reject_from(Vec3, Vec3) -> Vec3
+
+pub fn relative_error(Double, Double) -> Double
+
+pub fn relative_motion_distance(StateVector, StateVector, Double) -> Double
+
+pub fn relative_state(StateVector, StateVector) -> StateVector
+
+pub fn repeat_ground_track_period(Double, Double, Double, Int) -> Double
+
+pub fn report_is_valid(OrbitReport) -> Bool
+
+pub fn resample_linear(Array[TelemetrySample], Array[Double]) -> Array[TelemetrySample]
+
+pub fn resample_uniform(Array[Double], Double, Double, Int) -> Array[Double]
+
+pub fn residuals_linear((Double, Double), Array[Double], Array[Double]) -> Array[Double]
+
+pub fn resource_data_volume_mb(ResourceProfile) -> Double
+
+pub fn resource_end_of_life_power(ResourceProfile, Double) -> Double
+
+pub fn resource_is_valid(ResourceProfile) -> Bool
+
+pub fn resource_mass_fraction(ResourceProfile) -> Double
+
+pub fn resource_profile(Double, Double, Double, Double, Double) -> ResourceProfile
+
+pub fn revolutions_per_day_to_rad_per_second(Double) -> Double
+
+pub fn reynolds_number(Double, Double, Double, Double) -> Double
+
+pub fn risk_weighted_cost(Double, Double, Double) -> Double
+
+pub fn rk4_step(AccelerationModel, StateVector, Double) -> StateVector
+
+pub fn rocket_delta_v(Double, Double, Double) -> Double
+
+pub fn rotate_about_axis(Vec3, Vec3, Double) -> Vec3
+
+pub fn rotate_body_to_inertial(Quaternion, Vec3) -> Vec3
+
+pub fn rotate_inertial_to_body(Quaternion, Vec3) -> Vec3
+
+pub fn rotate_x(Vec3, Double) -> Vec3
+
+pub fn rotate_xyz(Vec3, Double, Double, Double) -> Vec3
+
+pub fn rotate_y(Vec3, Double) -> Vec3
+
 pub fn rotate_z(Vec3, Double) -> Vec3
+
+pub fn round_trip_delay_s(Double) -> Double
+
+pub fn safety_margin_km(SafetyAssessment, Double) -> Double
 
 pub fn sample_kepler_visibility(Double, GroundStation, Epoch, ClassicalElements, Double, Int) -> Array[VisibilitySample]
 
 pub fn sample_visibility(GroundStation, Epoch, Vec3) -> VisibilitySample
+
+pub fn schedule_contains_label(Array[MissionEvent], String) -> Bool
+
+pub fn schedule_delta_vs(Array[MissionEvent]) -> Array[Double]
+
+pub fn schedule_durations(Array[MissionEvent]) -> Array[Double]
+
+pub fn schedule_filter_kind(Array[MissionEvent], MissionEventKind) -> Array[MissionEvent]
+
+pub fn schedule_finish_time(Array[MissionEvent]) -> Double
+
+pub fn schedule_first(Array[MissionEvent]) -> MissionEvent?
+
+pub fn schedule_from_timeline(MissionTimeline) -> Array[MissionEvent]
+
+pub fn schedule_idle_time(Array[MissionEvent]) -> Double
+
+pub fn schedule_labels(Array[MissionEvent]) -> Array[String]
+
+pub fn schedule_last(Array[MissionEvent]) -> MissionEvent?
+
+pub fn schedule_overlap_count(Array[MissionEvent]) -> Int
+
+pub fn schedule_scale(Array[MissionEvent], Double) -> Array[MissionEvent]
+
+pub fn schedule_shift(Array[MissionEvent], Double) -> Array[MissionEvent]
+
+pub fn schedule_sort(Array[MissionEvent]) -> Array[MissionEvent]
+
+pub fn schedule_time_span(Array[MissionEvent]) -> Double
+
+pub fn schedule_times(Array[MissionEvent]) -> Array[Double]
+
+pub fn schedule_to_timeline(Array[MissionEvent]) -> MissionTimeline
+
+pub fn schedule_total_cost(Array[MissionEvent]) -> Double
+
+pub fn schedule_total_duration(Array[MissionEvent]) -> Double
+
+pub fn schedule_validate(Array[MissionEvent]) -> ValidationReport
+
+pub fn score_is_valid(MissionScore) -> Bool
+
+pub fn score_mission(Double, Double, Double, Double, Array[Double]) -> MissionScore
+
+pub fn second_difference(Array[Double], Double) -> Array[Double]
+
+pub fn seconds_to_days(Double) -> Double
+
+pub fn seconds_to_hours(Double) -> Double
+
+pub fn seconds_to_minutes(Double) -> Double
+
+pub fn segment_point_distance(Vec3, Vec3, Vec3) -> Double
+
+pub fn select_best_candidate(Array[DesignCandidate]) -> DesignCandidate?
 
 pub fn semi_latus_rectum(ClassicalElements) -> Double
 
@@ -98,27 +820,206 @@ pub fn semi_major_axis_from_mean_motion(Double, Double) -> Double
 
 pub fn sgp4_status() -> Sgp4Status
 
+pub fn signal_to_noise_db(Double, Double) -> Double
+
+pub fn signed_angle_about(Vec3, Vec3, Vec3) -> Double
+
+pub fn signed_angle_degrees(Double) -> Double
+
+pub fn simulate_plan(OperationPlan, Double) -> OperationPlan
+
+pub fn site_is_valid(Geodetic) -> Bool
+
+pub fn slew_time(Double, Double, Double) -> Double
+
+pub fn smooth_box(Array[Double], Int) -> Array[Double]
+
+pub fn smooth_exponential(Array[Double], Double) -> Array[Double]
+
+pub fn smooth_step(Double, Double, Double) -> Double
+
+pub fn solar_array_area_m2(Double, Double, Double) -> Double
+
+pub fn solar_declination(Epoch) -> Double
+
+pub fn solar_escape_margin(Double, Double, Double) -> Double
+
+pub fn solar_flux_at_distance(Double) -> Double
+
+pub fn solar_hour_angle(Geodetic, Epoch) -> Double
+
+pub fn solar_pressure_n_m2(Double) -> Double
+
 pub fn solve_kepler(Double, Double, tolerance? : Double, max_iterations? : Int) -> Double
+
+pub fn sort_catalog_by_altitude(Array[CatalogEntry]) -> Array[CatalogEntry]
+
+pub fn specific_angular_momentum(StateVector) -> Vec3
 
 pub fn specific_orbital_energy(Double, Double) -> Double
 
+pub fn speed_profile(Double, ClassicalElements, Int) -> Array[Double]
+
+pub fn spherical_to_cartesian(Double, Double, Double) -> Vec3
+
+pub fn spherical_triangle_excess(Vec3, Vec3, Vec3) -> Double
+
+pub fn square_kilometers_to_square_meters(Double) -> Double
+
+pub fn square_meters_to_square_kilometers(Double) -> Double
+
+pub fn state_after_impulse(StateVector, Vec3) -> StateVector
+
+pub fn state_is_valid(StateVector) -> Bool
+
+pub fn state_position_error(StateVector, StateVector) -> Double
+
+pub fn state_relative_error(StateVector, StateVector) -> Double
+
+pub fn state_velocity_error(StateVector, StateVector) -> Double
+
 pub fn summarize_orbit(Double, ClassicalElements) -> OrbitSummary
 
+pub fn summarize_samples(Array[Double]) -> SampleStats
+
+pub fn summarize_telemetry(String, Array[TelemetrySample]) -> TelemetrySummary
+
+pub fn sun_altitude(Geodetic, Epoch) -> Double
+
+pub fn sun_position(Epoch) -> SunPosition
+
 pub fn sun_synchronous_inclination(Double, Double, Double, Double, Double, Double) -> Double
+
+pub fn sunlight_power_fraction(EclipseResult, albedo? : Double) -> Double
+
+pub fn telemetry_channel_names(Array[TelemetrySample]) -> Array[String]
+
+pub fn telemetry_health(Array[TelemetrySample]) -> Double
+
+pub fn telemetry_is_valid(TelemetrySample) -> Bool
+
+pub fn telemetry_missing_intervals(Array[TelemetrySample], Double) -> Int
+
+pub fn telemetry_report(Array[TelemetrySample], String) -> OrbitReport
+
+pub fn telemetry_summary_is_valid(TelemetrySummary) -> Bool
+
+pub fn tetrahedron_volume(Vec3, Vec3, Vec3, Vec3) -> Double
+
+pub fn thermal_health(Double, Double) -> HealthFlag
+
+pub fn thermal_noise_power(Double, Double) -> Double
+
+pub fn thermal_power_margin(Double, Double) -> Double
+
+pub fn timeline_report(MissionTimeline) -> String
 
 pub fn tle_to_mean_elements(Double, TleRecord) -> ClassicalElements
 
 pub fn topocentric(Geodetic, Vec3) -> Topocentric
 
+pub fn torque_from_rate_error(Vec3, Vec3, Vec3, Double) -> Vec3
+
+pub fn trajectory_metrics(Array[DynamicsState]) -> TrajectoryMetrics
+
+pub fn transfer_angle(Vec3, Vec3, prograde? : Bool) -> Double
+
+pub fn transfer_is_prograde(Vec3, Vec3, Vec3) -> Bool
+
+pub fn transfer_is_valid(LambertSolution) -> Bool
+
+pub fn transfer_plane_normal(Vec3, Vec3) -> Vec3
+
+pub fn transfer_time_estimate(Double, Double, Double) -> Double
+
+pub fn transverse_velocity(StateVector) -> Double
+
+pub fn triangle_area(Vec3, Vec3, Vec3) -> Double
+
 pub fn true_anomaly_from_eccentric(Double, Double) -> Double
 
 pub let two_pi : Double
 
+pub fn validate_elements(ClassicalElements) -> ValidationReport
+
+pub fn validate_range(TelemetrySample, Double, Double) -> TelemetrySample
+
+pub fn validate_site(Geodetic) -> ValidationReport
+
+pub fn validate_state(StateVector) -> ValidationReport
+
+pub fn validate_telemetry(Array[TelemetrySample]) -> ValidationReport
+
+pub fn validate_timeline(MissionTimeline) -> ValidationReport
+
+pub fn validation_error_count(ValidationReport) -> Int
+
+pub fn validation_summary(ValidationReport) -> String
+
+pub fn validation_warning_count(ValidationReport) -> Int
+
+pub fn variance(Array[Double]) -> Double
+
 pub fn vis_viva_speed(Double, Double, Double) -> Double
+
+pub fn vis_viva_velocity(Double, Double, Double) -> Double
+
+pub fn watt_hours_to_joules(Double) -> Double
+
+pub fn watts_to_dbw(Double) -> Double
+
+pub fn weighted_objective(Array[Double], Array[Double], Double) -> Double
+
+pub fn wrap_positive(Double, Double) -> Double
+
+pub fn z_score(Double, Array[Double]) -> Double
 
 // Errors
 
 // Types and methods
+pub struct AccelerationModel {
+  central_body_mu : Double
+  j2_enabled : Bool
+  drag_enabled : Bool
+  ballistic_coefficient : Double
+  atmosphere_scale_height_km : Double
+} derive(Eq, @debug.Debug)
+pub fn AccelerationModel::earth() -> Self
+pub fn AccelerationModel::vacuum(Double) -> Self
+pub fn AccelerationModel::with_drag(Self, Double, Double) -> Self
+
+pub struct AttitudeState {
+  attitude : Quaternion
+  angular_velocity_rad_s : Vec3
+  covariance_trace : Double
+} derive(Eq, @debug.Debug)
+pub fn AttitudeState::new(Quaternion, Vec3) -> Self
+
+pub struct BenchmarkResult {
+  name : String
+  iterations : Int
+  checksum : Double
+} derive(Eq, @debug.Debug)
+
+pub struct CatalogEntry {
+  id : String
+  name : String
+  elements : ClassicalElements
+  epoch_day : Double
+  active : Bool
+} derive(Eq, @debug.Debug)
+pub fn CatalogEntry::new(String, String, ClassicalElements, Double, active? : Bool) -> Self
+
+pub struct CatalogQuery {
+  minimum_altitude_km : Double
+  maximum_altitude_km : Double
+  minimum_inclination_rad : Double
+  maximum_inclination_rad : Double
+  active_only : Bool
+} derive(Eq, @debug.Debug)
+pub fn CatalogQuery::any() -> Self
+pub fn CatalogQuery::leo() -> Self
+
 pub struct ClassicalElements {
   semi_major_axis_km : Double
   eccentricity : Double
@@ -128,6 +1029,73 @@ pub struct ClassicalElements {
   true_anomaly_rad : Double
 } derive(Eq, @debug.Debug)
 pub fn ClassicalElements::new(Double, Double, Double, Double, Double, Double) -> Self
+
+pub struct ContactCapacity {
+  duration_s : Double
+  rate_kbps : Double
+  volume_mb : Double
+  margin_db : Double
+} derive(Eq, @debug.Debug)
+
+pub struct ControlCommand {
+  axis : Vec3
+  angle_rad : Double
+  duration_s : Double
+  torque_nm : Vec3
+} derive(Eq, @debug.Debug)
+
+pub struct CoverageReport {
+  points : Int
+  visible_points : Int
+  visibility_fraction : Double
+  minimum_elevation_rad : Double
+  maximum_elevation_rad : Double
+} derive(Eq, @debug.Debug)
+
+pub struct DeltaVBudget {
+  planned_km_s : Double
+  reserve_fraction : Double
+  reserve_km_s : Double
+  total_km_s : Double
+} derive(Eq, @debug.Debug)
+
+pub struct DesignCandidate {
+  elements : ClassicalElements
+  score : Double
+  feasible : Bool
+  violations : Array[String]
+} derive(Eq, @debug.Debug)
+
+pub struct DesignConstraint {
+  minimum_altitude_km : Double
+  maximum_altitude_km : Double
+  maximum_eccentricity : Double
+  maximum_delta_v_km_s : Double
+  minimum_period_s : Double
+  maximum_period_s : Double
+} derive(Eq, @debug.Debug)
+pub fn DesignConstraint::any() -> Self
+pub fn DesignConstraint::leo() -> Self
+
+pub struct DynamicsState {
+  state : StateVector
+  acceleration_km_s2 : Vec3
+  elapsed_s : Double
+} derive(Eq, @debug.Debug)
+
+pub enum EclipseKind {
+  None
+  Penumbra
+  Umbra
+} derive(Eq, @debug.Debug)
+
+pub struct EclipseResult {
+  kind : EclipseKind
+  occultation_fraction : Double
+  sun_angle_rad : Double
+  earth_angle_rad : Double
+  duration_estimate_s : Double
+} derive(Eq, @debug.Debug)
 
 pub struct Epoch {
   seconds_since_j2000 : Double
@@ -159,6 +1127,26 @@ pub struct GroundStation {
 } derive(Eq, @debug.Debug)
 pub fn GroundStation::new(String, Double, Double, altitude_km? : Double, min_elevation_rad? : Double) -> Self
 
+pub struct GroundTrackPoint {
+  time_s : Double
+  latitude_rad : Double
+  longitude_rad : Double
+  altitude_km : Double
+} derive(Eq, @debug.Debug)
+
+pub struct HealthFlag {
+  name : String
+  value : Double
+  lower : Double
+  upper : Double
+  healthy : Bool
+} derive(Eq, @debug.Debug)
+
+pub struct Histogram {
+  edges : Array[Double]
+  counts : Array[Int]
+} derive(Eq, @debug.Debug)
+
 pub struct HohmannTransfer {
   radius_initial_km : Double
   radius_final_km : Double
@@ -175,11 +1163,153 @@ pub struct J2Rates {
   mean_anomaly_rate_rad_s : Double
 } derive(Eq, @debug.Debug)
 
+pub struct LambertSolution {
+  departure_velocity_km_s : Vec3
+  arrival_velocity_km_s : Vec3
+  transfer_angle_rad : Double
+  time_of_flight_s : Double
+  iterations : Int
+  status : SolveStatus
+} derive(Eq, @debug.Debug)
+
+pub struct LaunchWindow {
+  epoch_day : Double
+  duration_s : Double
+  azimuth_rad : Double
+  inclination_error_rad : Double
+  feasible : Bool
+} derive(Eq, @debug.Debug)
+
+pub struct LinearRegression {
+  slope : Double
+  intercept : Double
+  r_squared : Double
+} derive(Eq, @debug.Debug)
+
+pub struct LinkBudget {
+  frequency_ghz : Double
+  distance_km : Double
+  tx_power_dbw : Double
+  antenna_gain_db : Double
+  losses_db : Double
+  margin_db : Double
+} derive(Eq, @debug.Debug)
+
+pub struct LocalFrame {
+  east : Vec3
+  north : Vec3
+  up : Vec3
+} derive(Eq, @debug.Debug)
+
 pub struct LookAngle {
   azimuth_rad : Double
   elevation_rad : Double
   range_km : Double
 } derive(Eq, @debug.Debug)
+
+pub struct MissionEvent {
+  time_s : Double
+  kind : MissionEventKind
+  label : String
+  delta_v_km_s : Double
+  duration_s : Double
+} derive(Eq, @debug.Debug)
+pub fn MissionEvent::new(Double, MissionEventKind, String, delta_v_km_s? : Double, duration_s? : Double) -> Self
+
+pub enum MissionEventKind {
+  OrbitInsertion
+  Maneuver
+  GroundContact
+  EclipseEntry
+  EclipseExit
+  PayloadOperation
+  Custom
+} derive(Eq, @debug.Debug)
+
+pub struct MissionScore {
+  safety : Double
+  coverage : Double
+  cost : Double
+  science : Double
+  total : Double
+} derive(Eq, @debug.Debug)
+
+pub struct MissionTimeline {
+  events : Array[MissionEvent]
+  end_time_s : Double
+} derive(Eq, @debug.Debug)
+pub fn MissionTimeline::add(Self, MissionEvent) -> Self
+pub fn MissionTimeline::duration(Self) -> Double
+pub fn MissionTimeline::events_in_range(Self, Double, Double) -> Array[MissionEvent]
+pub fn MissionTimeline::new(end_time_s? : Double) -> Self
+pub fn MissionTimeline::sort_by_time(Self) -> Self
+pub fn MissionTimeline::total_delta_v(Self) -> Double
+
+pub struct MoonPosition {
+  position_eci_km : Vec3
+  distance_km : Double
+  phase_angle_rad : Double
+} derive(Eq, @debug.Debug)
+
+pub enum OperationMode {
+  Nominal
+  Safe
+  Contingency
+  Simulation
+} derive(Eq, @debug.Debug)
+
+pub struct OperationPlan {
+  name : String
+  steps : Array[OperationStep]
+  total_duration_s : Double
+  total_resource_cost : Double
+} derive(Eq, @debug.Debug)
+pub fn OperationPlan::append(Self, OperationStep) -> Self
+pub fn OperationPlan::complete_step(Self, Int) -> Self
+pub fn OperationPlan::completion_fraction(Self) -> Double
+pub fn OperationPlan::is_ready(Self) -> Bool
+pub fn OperationPlan::new(String) -> Self
+pub fn OperationPlan::remaining_steps(Self) -> Array[OperationStep]
+pub fn OperationPlan::resource_remaining(Self, Double) -> Double
+
+pub struct OperationStep {
+  index : Int
+  name : String
+  mode : OperationMode
+  duration_s : Double
+  resource_cost : Double
+  completed : Bool
+} derive(Eq, @debug.Debug)
+pub fn OperationStep::new(Int, String, OperationMode, Double, Double) -> Self
+
+pub struct OptimizationResult {
+  parameters : Array[Double]
+  objective : Double
+  iterations : Int
+  converged : Bool
+} derive(Eq, @debug.Debug)
+
+pub struct OrbitAnalysis {
+  elements : ClassicalElements
+  state : StateVector
+  altitude_km : Double
+  speed_km_s : Double
+  radial_speed_km_s : Double
+  flight_path_angle_rad : Double
+  energy_km2_s2 : Double
+  angular_momentum_km2_s : Double
+} derive(Eq, @debug.Debug)
+
+pub struct OrbitReport {
+  title : String
+  sections : Array[String]
+  metrics : Array[(String, Double)]
+} derive(Eq, @debug.Debug)
+pub fn OrbitReport::add_metric(Self, String, Double) -> Self
+pub fn OrbitReport::add_section(Self, String) -> Self
+pub fn OrbitReport::metric(Self, String) -> Double?
+pub fn OrbitReport::new(String) -> Self
+pub fn OrbitReport::render(Self) -> String
 
 pub struct OrbitSummary {
   radius_periapsis_km : Double
@@ -189,10 +1319,30 @@ pub struct OrbitSummary {
   specific_energy_km2_s2 : Double
 } derive(Eq, @debug.Debug)
 
+pub struct PassWindow {
+  rise_time_s : Double
+  set_time_s : Double
+  max_elevation_rad : Double
+  samples : Int
+} derive(Eq, @debug.Debug)
+
+pub struct PerigeeApogee {
+  perigee_km : Double
+  apogee_km : Double
+  perigee_altitude_km : Double
+  apogee_altitude_km : Double
+} derive(Eq, @debug.Debug)
+
 pub struct PlaneChange {
   speed_km_s : Double
   angle_rad : Double
   delta_v_km_s : Double
+} derive(Eq, @debug.Debug)
+
+pub struct PointingTarget {
+  direction : Vec3
+  roll_rad : Double
+  tolerance_rad : Double
 } derive(Eq, @debug.Debug)
 
 pub struct Quaternion {
@@ -213,9 +1363,48 @@ pub fn Quaternion::normalized(Self) -> Self
 pub fn Quaternion::rotate(Self, Vec3) -> Vec3
 pub fn Quaternion::to_euler(Self) -> EulerAngles
 
+pub struct ResourceProfile {
+  mass_kg : Double
+  propellant_kg : Double
+  power_w : Double
+  data_rate_kbps : Double
+  lifetime_days : Double
+} derive(Eq, @debug.Debug)
+
+pub struct RootResult {
+  value : Double
+  residual : Double
+  iterations : Int
+  status : SolveStatus
+} derive(Eq, @debug.Debug)
+
+pub struct SafetyAssessment {
+  minimum_distance_km : Double
+  relative_speed_km_s : Double
+  closing_speed_km_s : Double
+  time_to_closest_s : Double
+  collision_probability_proxy : Double
+  safe : Bool
+} derive(Eq, @debug.Debug)
+
+pub struct SampleStats {
+  count : Int
+  minimum : Double
+  maximum : Double
+  mean : Double
+  variance : Double
+  sum : Double
+} derive(Eq, @debug.Debug)
+
 pub struct Sgp4Status {
   available : Bool
   note : String
+} derive(Eq, @debug.Debug)
+
+pub enum SolveStatus {
+  Converged
+  MaxIterations
+  InvalidInput
 } derive(Eq, @debug.Debug)
 
 pub struct StateVector {
@@ -223,6 +1412,39 @@ pub struct StateVector {
   velocity_km_s : Vec3
 } derive(Eq, @debug.Debug)
 pub fn StateVector::new(Vec3, Vec3) -> Self
+
+pub struct SunPosition {
+  position_eci_km : Vec3
+  distance_au : Double
+  right_ascension_rad : Double
+  declination_rad : Double
+} derive(Eq, @debug.Debug)
+
+pub enum TelemetryQuality {
+  Good
+  Suspect
+  Invalid
+} derive(Eq, @debug.Debug)
+
+pub struct TelemetrySample {
+  time_s : Double
+  name : String
+  value : Double
+  unit : String
+  quality : TelemetryQuality
+} derive(Eq, @debug.Debug)
+pub fn TelemetrySample::new(Double, String, Double, String) -> Self
+pub fn TelemetrySample::with_quality(Self, TelemetryQuality) -> Self
+
+pub struct TelemetrySummary {
+  name : String
+  count : Int
+  valid_count : Int
+  minimum : Double
+  maximum : Double
+  mean : Double
+  latest_time_s : Double
+} derive(Eq, @debug.Debug)
 
 pub(all) enum TleParseError {
   LineTooShort(String)
@@ -249,6 +1471,34 @@ pub struct Topocentric {
   east_km : Double
   north_km : Double
   up_km : Double
+} derive(Eq, @debug.Debug)
+
+pub struct TrajectoryMetrics {
+  duration_s : Double
+  samples : Int
+  distance_km : Double
+  max_speed_km_s : Double
+  min_altitude_km : Double
+  max_altitude_km : Double
+} derive(Eq, @debug.Debug)
+
+pub enum ValidationLevel {
+  Info
+  Warning
+  Error
+} derive(Eq, @debug.Debug)
+
+pub struct ValidationMessage {
+  level : ValidationLevel
+  code : String
+  message : String
+} derive(Eq, @debug.Debug)
+pub fn ValidationMessage::new(ValidationLevel, String, String) -> Self
+
+pub struct ValidationReport {
+  valid : Bool
+  messages : Array[ValidationMessage]
+  score : Double
 } derive(Eq, @debug.Debug)
 
 pub struct Vec3 {
@@ -286,4 +1536,3 @@ pub struct VisibilityWindow {
 // Type aliases
 
 // Traits
-

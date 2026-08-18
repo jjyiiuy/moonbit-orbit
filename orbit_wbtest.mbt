@@ -98,7 +98,7 @@ test "tle parser extracts mean elements" {
       )
       assert_close(tle.eccentricity, 0.0006703, 1.0e-10)
     }
-    Err(e) => fail("unexpected TLE error: \{to_repr(e)}")
+    Err(e) => fail("unexpected TLE error: \{Repr(e)}")
   }
 }
 

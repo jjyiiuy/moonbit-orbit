@@ -25,5 +25,6 @@ fn main {
     @orbit.radians(30.0),
   )
   let body_x = q.rotate(@orbit.Vec3::new(1.0, 0.0, 0.0))
-  println("rotated body-x: \{to_repr(body_x)}")
+  println("rotated body-x: \{Repr(body_x)}")
+  println(@orbit.benchmark_report_text(@orbit.benchmark_report(256)))
 }

@@ -1,0 +1,29 @@
+name: Release validation
+
+on:
+  push:
+    tags: ["v*.*.*"]
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    name: Validate Mooncakes package
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install MoonBit stable
+        run: |
+          curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash
+          echo "$HOME/.moon/bin" >> "$GITHUB_PATH"
+      - name: Validate metadata and build
+        run: |
+          moon version
+          moon fmt --check
+          moon check --deny-warn
+          moon test --deny-warn
+          moon info
+          git diff --exit-code
+          moon build

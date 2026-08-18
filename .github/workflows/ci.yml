@@ -4,6 +4,13 @@ on:
   push:
   pull_request:
 
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
 jobs:
   moonbit:
     name: MoonBit (${{ matrix.os }})
@@ -24,6 +31,7 @@ jobs:
       - name: Install MoonBit on Unix
         if: runner.os != 'Windows'
         run: |
+          if [ "${{ runner.os }}" = "Linux" ]; then sudo apt-get update && sudo apt-get install -y gcc; fi
           curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash
           echo "$HOME/.moon/bin" >> "$GITHUB_PATH"
 
@@ -47,6 +55,9 @@ jobs:
       - name: Test
         run: moon test --deny-warn
 
+      - name: Native test
+        run: moon test --target native --deny-warn
+
       - name: Generated API is committed
         run: |
           moon info
@@ -57,3 +68,8 @@ jobs:
 
       - name: All backend check
         run: moon check --target all --deny-warn
+
+      - name: Coverage summary
+        run: |
+          moon test --enable-coverage --deny-warn
+          moon coverage report -f summary
