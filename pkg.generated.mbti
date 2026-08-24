@@ -24,6 +24,8 @@ pub fn accumulate_budgets(Array[DeltaVBudget]) -> DeltaVBudget
 
 pub fn all_mission_event_kinds() -> Array[MissionEventKind]
 
+pub fn all_observation_kinds() -> Array[ObservationKind]
+
 pub fn all_operation_modes() -> Array[OperationMode]
 
 pub fn all_validation_levels() -> Array[ValidationLevel]
@@ -162,6 +164,8 @@ pub fn command_is_within_tolerance(ControlCommand, Double) -> Bool
 
 pub fn communication_health(Double, Double) -> HealthFlag
 
+pub fn compare_state_samples(Array[StateSample], Array[StateSample]) -> StateComparison
+
 pub fn conjunction_screen(StateVector, Array[StateVector], Double) -> Array[SafetyAssessment]
 
 pub fn contact_capacity(Double, Double, LinkBudget) -> ContactCapacity
@@ -178,7 +182,11 @@ pub fn convert_unit(Double, String, String) -> Double
 
 pub fn correlation(Array[Double], Array[Double]) -> Double
 
+pub fn count_phase_overlaps(MissionScenario) -> Int
+
 pub fn covariance(Array[Double], Array[Double]) -> Double
+
+pub fn covariance_of_observations(Array[Observation], Array[Observation]) -> Double
 
 pub fn coverage_cells_for_track(Array[GroundTrackPoint], Double, Double) -> Int
 
@@ -270,6 +278,8 @@ pub fn escape_velocity(Double, Double) -> Double
 
 pub fn estimate_eclipse_duration(Double, Double, Double) -> Double
 
+pub fn estimate_observation_bias(Array[Observation]) -> ScalarEstimate
+
 pub fn estimate_orbit_pass(GroundStation, ClassicalElements, Epoch, Double, Double, Double) -> Array[PassWindow]
 
 pub fn euler_to_quaternion(EulerAngles) -> Quaternion
@@ -286,6 +296,8 @@ pub fn feasible_designs(Array[DesignCandidate]) -> Array[DesignCandidate]
 
 pub fn filter_catalog(Array[CatalogEntry], CatalogQuery) -> Array[CatalogEntry]
 
+pub fn filter_windows_by_time(Array[VisibilityWindow], Epoch, Epoch) -> Array[VisibilityWindow]
+
 pub fn find_bracket((Double) -> Double, Double, Double, samples? : Int) -> (Double, Double)?
 
 pub fn find_catalog_entry(Array[CatalogEntry], String) -> CatalogEntry?
@@ -297,6 +309,8 @@ pub fn finite_difference(Array[Double], Double) -> Array[Double]
 pub fn finite_difference_gradient((Array[Double]) -> Double, Array[Double], Double) -> Array[Double]
 
 pub fn finite_or(Double, Double) -> Double
+
+pub fn fit_observation_trend(Array[Observation]) -> TrendEstimate
 
 pub fn flight_path_angle(StateVector) -> Double
 
@@ -325,6 +339,14 @@ pub fn great_circle_arc_length(Double, Vec3, Vec3) -> Double
 pub fn grid_search_1d((Double) -> Double, Double, Double, Int) -> (Double, Double)
 
 pub fn ground_track(Double, ClassicalElements, Epoch, Double, Double) -> Array[GroundTrackPoint]
+
+pub fn ground_track_bounds(Array[GroundTrackPoint]) -> GroundTrackBounds
+
+pub fn ground_track_gap_count(Array[GroundTrackPoint], Double) -> Int
+
+pub fn ground_track_path_length(Array[GroundTrackPoint]) -> Double
+
+pub fn ground_track_summary(Array[GroundTrackPoint]) -> GroundTrackSummary
 
 pub let half_pi : Double
 
@@ -370,7 +392,11 @@ pub fn inclination_is_valid(ClassicalElements, Double, Double) -> Bool
 
 pub fn inertial_to_perifocal(ClassicalElements, Vec3) -> Vec3
 
+pub fn information_variance(Array[Observation]) -> Double
+
 pub fn initial_bearing_rad(Geodetic, Geodetic) -> Double
+
+pub fn innovation_is_acceptable(ScalarEstimate, Double) -> Bool
 
 pub fn integrate_dynamics(AccelerationModel, StateVector, Double, Double) -> Array[DynamicsState]
 
@@ -387,6 +413,8 @@ pub fn interpolate_array(Array[Double], Array[Double], Double) -> Double
 pub fn interpolate_direction(Vec3, Vec3, Double) -> Vec3
 
 pub fn interpolate_state(StateVector, StateVector, Double) -> StateVector
+
+pub fn invalid_observation_quality() -> ObservationQuality
 
 pub fn inverse_lerp(Double, Double, Double) -> Double
 
@@ -480,7 +508,11 @@ pub fn make_delta_v_budget(Double, reserve_fraction? : Double) -> DeltaVBudget
 
 pub fn make_pointing_target(Vec3, Double, Double) -> PointingTarget
 
+pub fn make_visibility_window(Epoch, Epoch, Double, Double) -> VisibilityWindow
+
 pub fn maneuver_event(Double, String, Double) -> MissionEvent
+
+pub fn mark_observation_outlier(Observation, Double) -> Observation
 
 pub fn maximum_latitude(Array[GroundTrackPoint]) -> Double
 
@@ -493,6 +525,8 @@ pub fn mean_anomaly_from_eccentric(Double, Double) -> Double
 pub fn mean_motion(Double, Double) -> Double
 
 pub fn mean_motion_rev_day_to_rad_s(Double) -> Double
+
+pub fn merge_adjacent_windows(Array[VisibilityWindow], Double) -> Array[VisibilityWindow]
 
 pub fn meridian_radius_km(Double) -> Double
 
@@ -523,6 +557,8 @@ pub fn mission_energy_proxy(Double, ClassicalElements, Double) -> Double
 pub fn mission_event_count(MissionTimeline, MissionEventKind) -> Int
 
 pub fn mission_event_kind_name(MissionEventKind) -> String
+
+pub fn mission_phase(String, Double, Double, Double) -> MissionPhase
 
 pub fn mission_report(MissionTimeline, DeltaVBudget) -> OrbitReport
 
@@ -563,6 +599,24 @@ pub fn normalize_time_of_day_seconds(Double) -> Double
 pub fn normalize_weights(Array[Double]) -> Array[Double]
 
 pub fn objective_orbit_altitude(Double, ClassicalElements, Double) -> Double
+
+pub fn observation_information(Array[Observation]) -> Double
+
+pub fn observation_kind_is_angular(ObservationKind) -> Bool
+
+pub fn observation_kind_is_dynamic(ObservationKind) -> Bool
+
+pub fn observation_kind_name(ObservationKind) -> String
+
+pub fn observation_prediction(GroundStation, Epoch, StateVector, ObservationKind) -> Double
+
+pub fn observation_quality_score(Observation) -> Double
+
+pub fn observation_residual(Observation, StateVector) -> Double
+
+pub fn observation_residual_summary(Array[Observation], Double) -> ResidualSummary
+
+pub fn observe_state(GroundStation, Epoch, StateVector, ObservationKind, bias? : Double, sigma? : Double) -> Observation
 
 pub fn orbit_eccentricity_limit(ClassicalElements) -> Double
 
@@ -608,6 +662,18 @@ pub fn period_is_valid(ClassicalElements, Double, Double) -> Bool
 
 pub fn period_seconds_to_hertz(Double) -> Double
 
+pub fn phase_contains(MissionPhase, Double) -> Bool
+
+pub fn phase_duration_s(MissionPhase) -> Double
+
+pub fn phase_is_well_formed(MissionPhase) -> Bool
+
+pub fn phase_utilization(MissionPhase, Double) -> Double
+
+pub fn phases_at_time(MissionScenario, Double) -> Array[MissionPhase]
+
+pub fn phases_with_priority(MissionScenario, Int) -> Array[MissionPhase]
+
 pub fn phasing_delta_v(Double, Double, Double, Int) -> Double
 
 pub fn phasing_orbit_axis(Double, Double) -> Double
@@ -615,6 +681,8 @@ pub fn phasing_orbit_axis(Double, Double) -> Double
 pub fn photon_energy(Double) -> Double
 
 pub let pi : Double
+
+pub fn plan_windows(Array[VisibilityWindow], WindowConstraint, Double) -> WindowSchedule
 
 pub fn plane_change(Double, Double) -> PlaneChange
 
@@ -631,6 +699,8 @@ pub fn polynomial_fit_linear(Array[Double], Array[Double]) -> (Double, Double)
 pub fn pounds_to_kilograms(Double) -> Double
 
 pub fn predict_linear((Double, Double), Double) -> Double
+
+pub fn predict_trend(TrendEstimate, Epoch) -> Double
 
 pub fn prime_vertical_radius_km(Double) -> Double
 
@@ -649,6 +719,8 @@ pub fn propagate_catalog(Array[CatalogEntry], Double) -> Array[CatalogEntry]
 pub fn propagate_j2_mean_elements(Double, Double, Double, ClassicalElements, Double) -> ClassicalElements
 
 pub fn propagate_kepler(Double, ClassicalElements, Double) -> ClassicalElements
+
+pub fn propagate_state_samples(Double, ClassicalElements, Array[Double]) -> Array[StateSample]
 
 pub fn propellant_mass_from_delta_v(Double, Double, Double) -> Double
 
@@ -700,6 +772,10 @@ pub fn regression_is_valid(LinearRegression) -> Bool
 
 pub fn reject_from(Vec3, Vec3) -> Vec3
 
+pub fn reject_observation(Observation, Double) -> Observation
+
+pub fn reject_outliers(Array[Observation], Double) -> Array[Observation]
+
 pub fn relative_error(Double, Double) -> Double
 
 pub fn relative_motion_distance(StateVector, StateVector, Double) -> Double
@@ -709,6 +785,8 @@ pub fn relative_state(StateVector, StateVector) -> StateVector
 pub fn repeat_ground_track_period(Double, Double, Double, Int) -> Double
 
 pub fn report_is_valid(OrbitReport) -> Bool
+
+pub fn resample_ground_track(Array[GroundTrackPoint], Array[Double]) -> Array[GroundTrackPoint]
 
 pub fn resample_linear(Array[TelemetrySample], Array[Double]) -> Array[TelemetrySample]
 
@@ -758,11 +836,37 @@ pub fn sample_kepler_visibility(Double, GroundStation, Epoch, ClassicalElements,
 
 pub fn sample_visibility(GroundStation, Epoch, Vec3) -> VisibilitySample
 
+pub fn scenario_append_all(MissionScenario, Array[MissionPhase]) -> MissionScenario
+
+pub fn scenario_delta_v(MissionScenario) -> Double
+
+pub fn scenario_duration_s(MissionScenario) -> Double
+
+pub fn scenario_is_empty(MissionScenario) -> Bool
+
+pub fn scenario_is_well_formed(MissionScenario) -> Bool
+
+pub fn scenario_peak_priority(MissionScenario) -> Int
+
+pub fn scenario_phase_names(MissionScenario) -> Array[String]
+
+pub fn scenario_report(MissionScenario, Double) -> String
+
+pub fn scenario_resource_cost(MissionScenario) -> Double
+
+pub fn scenario_resource_margin(MissionScenario, Double) -> Double
+
+pub fn scenario_to_timeline(MissionScenario) -> MissionTimeline
+
+pub fn scenario_utilization(MissionScenario, Double) -> Double
+
 pub fn schedule_contains_label(Array[MissionEvent], String) -> Bool
 
 pub fn schedule_delta_vs(Array[MissionEvent]) -> Array[Double]
 
 pub fn schedule_durations(Array[MissionEvent]) -> Array[Double]
+
+pub fn schedule_efficiency(WindowSchedule) -> Double
 
 pub fn schedule_filter_kind(Array[MissionEvent], MissionEventKind) -> Array[MissionEvent]
 
@@ -770,13 +874,21 @@ pub fn schedule_finish_time(Array[MissionEvent]) -> Double
 
 pub fn schedule_first(Array[MissionEvent]) -> MissionEvent?
 
+pub fn schedule_first_window(WindowSchedule) -> PlannedWindow?
+
 pub fn schedule_from_timeline(MissionTimeline) -> Array[MissionEvent]
 
+pub fn schedule_gap_seconds(WindowSchedule) -> Double
+
 pub fn schedule_idle_time(Array[MissionEvent]) -> Double
+
+pub fn schedule_is_feasible(WindowSchedule, Double) -> Bool
 
 pub fn schedule_labels(Array[MissionEvent]) -> Array[String]
 
 pub fn schedule_last(Array[MissionEvent]) -> MissionEvent?
+
+pub fn schedule_last_window(WindowSchedule) -> PlannedWindow?
 
 pub fn schedule_overlap_count(Array[MissionEvent]) -> Int
 
@@ -786,9 +898,13 @@ pub fn schedule_shift(Array[MissionEvent], Double) -> Array[MissionEvent]
 
 pub fn schedule_sort(Array[MissionEvent]) -> Array[MissionEvent]
 
+pub fn schedule_summary(WindowSchedule) -> String
+
 pub fn schedule_time_span(Array[MissionEvent]) -> Double
 
 pub fn schedule_times(Array[MissionEvent]) -> Array[Double]
+
+pub fn schedule_to_mission_timeline(WindowSchedule, String) -> MissionTimeline
 
 pub fn schedule_to_timeline(Array[MissionEvent]) -> MissionTimeline
 
@@ -797,6 +913,10 @@ pub fn schedule_total_cost(Array[MissionEvent]) -> Double
 pub fn schedule_total_duration(Array[MissionEvent]) -> Double
 
 pub fn schedule_validate(Array[MissionEvent]) -> ValidationReport
+
+pub fn schedule_window(VisibilityWindow, WindowConstraint, Double) -> PlannedWindow
+
+pub fn schedule_window_count(WindowSchedule) -> Int
 
 pub fn score_is_valid(MissionScore) -> Bool
 
@@ -809,6 +929,8 @@ pub fn seconds_to_days(Double) -> Double
 pub fn seconds_to_hours(Double) -> Double
 
 pub fn seconds_to_minutes(Double) -> Double
+
+pub fn segment_ground_track(Array[GroundTrackPoint], Double) -> Array[GroundTrackSegment]
 
 pub fn segment_point_distance(Vec3, Vec3, Vec3) -> Double
 
@@ -870,17 +992,27 @@ pub fn square_meters_to_square_kilometers(Double) -> Double
 
 pub fn state_after_impulse(StateVector, Vec3) -> StateVector
 
+pub fn state_comparison_is_valid(StateComparison, Double, Double) -> Bool
+
+pub fn state_comparison_score(StateComparison) -> Double
+
 pub fn state_is_valid(StateVector) -> Bool
 
 pub fn state_position_error(StateVector, StateVector) -> Double
 
 pub fn state_relative_error(StateVector, StateVector) -> Double
 
+pub fn state_sample_at(Array[StateSample], Double) -> StateSample?
+
+pub fn state_samples_to_csv(Array[StateSample]) -> String
+
 pub fn state_velocity_error(StateVector, StateVector) -> Double
 
 pub fn summarize_orbit(Double, ClassicalElements) -> OrbitSummary
 
 pub fn summarize_samples(Array[Double]) -> SampleStats
+
+pub fn summarize_scenario(MissionScenario, Double) -> ScenarioSummary
 
 pub fn summarize_telemetry(String, Array[TelemetrySample]) -> TelemetrySummary
 
@@ -920,6 +1052,20 @@ pub fn topocentric(Geodetic, Vec3) -> Topocentric
 
 pub fn torque_from_rate_error(Vec3, Vec3, Vec3, Double) -> Vec3
 
+pub fn track_altitude_stats(Array[GroundTrackPoint]) -> SampleStats
+
+pub fn track_filter_altitude(Array[GroundTrackPoint], Double, Double) -> Array[GroundTrackPoint]
+
+pub fn track_filter_time(Array[GroundTrackPoint], Double, Double) -> Array[GroundTrackPoint]
+
+pub fn track_is_contiguous(Array[GroundTrackPoint], Double) -> Bool
+
+pub fn track_latitude_histogram(Array[GroundTrackPoint], Int) -> Histogram
+
+pub fn track_time_step_stats(Array[GroundTrackPoint]) -> SampleStats
+
+pub fn track_to_csv(Array[GroundTrackPoint]) -> String
+
 pub fn trajectory_metrics(Array[DynamicsState]) -> TrajectoryMetrics
 
 pub fn transfer_angle(Vec3, Vec3, prograde? : Bool) -> Double
@@ -933,6 +1079,8 @@ pub fn transfer_plane_normal(Vec3, Vec3) -> Vec3
 pub fn transfer_time_estimate(Double, Double, Double) -> Double
 
 pub fn transverse_velocity(StateVector) -> Double
+
+pub fn trend_is_stable(TrendEstimate, Double) -> Bool
 
 pub fn triangle_area(Vec3, Vec3, Vec3) -> Double
 
@@ -969,6 +1117,20 @@ pub fn watt_hours_to_joules(Double) -> Double
 pub fn watts_to_dbw(Double) -> Double
 
 pub fn weighted_objective(Array[Double], Array[Double], Double) -> Double
+
+pub fn weighted_residual_estimate(Array[Observation]) -> ScalarEstimate
+
+pub fn weighted_scalar_estimate(Array[Observation]) -> ScalarEstimate
+
+pub fn window_data_volume_mb(VisibilityWindow, Double) -> Double
+
+pub fn window_duration_s(VisibilityWindow) -> Double
+
+pub fn window_is_acceptable(VisibilityWindow, WindowConstraint) -> Bool
+
+pub fn window_midpoint(VisibilityWindow) -> Epoch
+
+pub fn window_quality_score(VisibilityWindow, WindowConstraint) -> Double
 
 pub fn wrap_positive(Double, Double) -> Double
 
@@ -1107,6 +1269,12 @@ pub fn Epoch::from_days(Double) -> Self
 pub fn Epoch::from_seconds(Double) -> Self
 pub fn Epoch::j2000() -> Self
 
+pub enum EstimateStatus {
+  Converged
+  InsufficientData
+  Singular
+} derive(Eq, @debug.Debug)
+
 pub struct EulerAngles {
   roll_rad : Double
   pitch_rad : Double
@@ -1127,11 +1295,39 @@ pub struct GroundStation {
 } derive(Eq, @debug.Debug)
 pub fn GroundStation::new(String, Double, Double, altitude_km? : Double, min_elevation_rad? : Double) -> Self
 
+pub struct GroundTrackBounds {
+  minimum_latitude_rad : Double
+  maximum_latitude_rad : Double
+  minimum_longitude_rad : Double
+  maximum_longitude_rad : Double
+  minimum_altitude_km : Double
+  maximum_altitude_km : Double
+} derive(Eq, @debug.Debug)
+
 pub struct GroundTrackPoint {
   time_s : Double
   latitude_rad : Double
   longitude_rad : Double
   altitude_km : Double
+} derive(Eq, @debug.Debug)
+
+pub struct GroundTrackSegment {
+  points : Array[GroundTrackPoint]
+  start_time_s : Double
+  end_time_s : Double
+  path_length_km : Double
+} derive(Eq, @debug.Debug)
+
+pub struct GroundTrackSummary {
+  points : Int
+  duration_s : Double
+  minimum_altitude_km : Double
+  maximum_altitude_km : Double
+  mean_altitude_km : Double
+  maximum_latitude_rad : Double
+  longitude_span_rad : Double
+  path_length_km : Double
+  gap_count : Int
 } derive(Eq, @debug.Debug)
 
 pub struct HealthFlag {
@@ -1226,6 +1422,27 @@ pub enum MissionEventKind {
   Custom
 } derive(Eq, @debug.Debug)
 
+pub struct MissionPhase {
+  name : String
+  start_s : Double
+  end_s : Double
+  delta_v_km_s : Double
+  priority : Int
+  resource_cost : Double
+} derive(Eq, @debug.Debug)
+pub fn MissionPhase::with_priority(Self, Int) -> Self
+pub fn MissionPhase::with_resource_cost(Self, Double) -> Self
+
+pub struct MissionScenario {
+  name : String
+  phases : Array[MissionPhase]
+  reserve_km_s : Double
+} derive(Eq, @debug.Debug)
+pub fn MissionScenario::add_phase(Self, MissionPhase) -> Self
+pub fn MissionScenario::new(String) -> Self
+pub fn MissionScenario::sort_by_start(Self) -> Self
+pub fn MissionScenario::with_reserve(Self, Double) -> Self
+
 pub struct MissionScore {
   safety : Double
   coverage : Double
@@ -1249,6 +1466,50 @@ pub struct MoonPosition {
   position_eci_km : Vec3
   distance_km : Double
   phase_angle_rad : Double
+} derive(Eq, @debug.Debug)
+
+pub struct Observation {
+  epoch : Epoch
+  station : GroundStation
+  kind : ObservationKind
+  value : Double
+  predicted : Double
+  sigma : Double
+  quality : ObservationQuality
+} derive(Eq, @debug.Debug)
+pub fn Observation::is_valid(Self) -> Bool
+pub fn Observation::new(Epoch, GroundStation, ObservationKind, Double, Double) -> Self
+pub fn Observation::normalized_residual(Self) -> Double
+pub fn Observation::residual(Self) -> Double
+pub fn Observation::weight(Self) -> Double
+pub fn Observation::with_prediction(Self, Double) -> Self
+pub fn Observation::with_quality(Self, ObservationQuality) -> Self
+
+pub struct ObservationBatch {
+  name : String
+  observations : Array[Observation]
+} derive(Eq, @debug.Debug)
+pub fn ObservationBatch::add(Self, Observation) -> Self
+pub fn ObservationBatch::by_kind(Self, ObservationKind) -> Array[Observation]
+pub fn ObservationBatch::invalid_count(Self) -> Int
+pub fn ObservationBatch::new(String) -> Self
+pub fn ObservationBatch::residual_rms(Self) -> Double
+pub fn ObservationBatch::sort_by_epoch(Self) -> Self
+pub fn ObservationBatch::span_s(Self) -> Double
+pub fn ObservationBatch::valid_count(Self) -> Int
+pub fn ObservationBatch::weighted_residual_rms(Self) -> Double
+
+pub enum ObservationKind {
+  Range
+  RangeRate
+  Azimuth
+  Elevation
+} derive(Eq, @debug.Debug)
+
+pub enum ObservationQuality {
+  Good
+  Suspect
+  Invalid
 } derive(Eq, @debug.Debug)
 
 pub enum OperationMode {
@@ -1339,6 +1600,13 @@ pub struct PlaneChange {
   delta_v_km_s : Double
 } derive(Eq, @debug.Debug)
 
+pub struct PlannedWindow {
+  window : VisibilityWindow
+  score : Double
+  data_volume_mb : Double
+  selected : Bool
+} derive(Eq, @debug.Debug)
+
 pub struct PointingTarget {
   direction : Vec3
   roll_rad : Double
@@ -1362,6 +1630,14 @@ pub fn Quaternion::norm_squared(Self) -> Double
 pub fn Quaternion::normalized(Self) -> Self
 pub fn Quaternion::rotate(Self, Vec3) -> Vec3
 pub fn Quaternion::to_euler(Self) -> EulerAngles
+
+pub struct ResidualSummary {
+  count : Int
+  mean : Double
+  rms : Double
+  maximum_abs : Double
+  rejected : Int
+} derive(Eq, @debug.Debug)
 
 pub struct ResourceProfile {
   mass_kg : Double
@@ -1396,6 +1672,24 @@ pub struct SampleStats {
   sum : Double
 } derive(Eq, @debug.Debug)
 
+pub struct ScalarEstimate {
+  value : Double
+  variance : Double
+  residual_rms : Double
+  used : Int
+  status : EstimateStatus
+} derive(Eq, @debug.Debug)
+
+pub struct ScenarioSummary {
+  valid : Bool
+  phase_count : Int
+  total_duration_s : Double
+  total_delta_v_km_s : Double
+  total_resource_cost : Double
+  overlap_count : Int
+  resource_remaining : Double
+} derive(Eq, @debug.Debug)
+
 pub struct Sgp4Status {
   available : Bool
   note : String
@@ -1405,6 +1699,20 @@ pub enum SolveStatus {
   Converged
   MaxIterations
   InvalidInput
+} derive(Eq, @debug.Debug)
+
+pub struct StateComparison {
+  count : Int
+  position_rms_km : Double
+  velocity_rms_km_s : Double
+  position_max_km : Double
+  velocity_max_km_s : Double
+  time_span_s : Double
+} derive(Eq, @debug.Debug)
+
+pub struct StateSample {
+  time_s : Double
+  state : StateVector
 } derive(Eq, @debug.Debug)
 
 pub struct StateVector {
@@ -1482,6 +1790,15 @@ pub struct TrajectoryMetrics {
   max_altitude_km : Double
 } derive(Eq, @debug.Debug)
 
+pub struct TrendEstimate {
+  intercept : Double
+  slope_per_s : Double
+  variance : Double
+  residual_rms : Double
+  used : Int
+  status : EstimateStatus
+} derive(Eq, @debug.Debug)
+
 pub enum ValidationLevel {
   Info
   Warning
@@ -1531,6 +1848,22 @@ pub struct VisibilityWindow {
   end : Epoch
   max_elevation_rad : Double
   closest_range_km : Double
+} derive(Eq, @debug.Debug)
+
+pub struct WindowConstraint {
+  minimum_elevation_rad : Double
+  maximum_range_km : Double
+  minimum_duration_s : Double
+  required_score : Double
+} derive(Eq, @debug.Debug)
+pub fn WindowConstraint::new(Double, Double, Double) -> Self
+pub fn WindowConstraint::with_score(Self, Double) -> Self
+
+pub struct WindowSchedule {
+  windows : Array[PlannedWindow]
+  total_duration_s : Double
+  total_volume_mb : Double
+  mean_score : Double
 } derive(Eq, @debug.Debug)
 
 // Type aliases

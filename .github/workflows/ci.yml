@@ -44,7 +44,9 @@ jobs:
           echo "$HOME/.moon/bin" | Out-File -FilePath $env:GITHUB_PATH -Append
 
       - name: Toolchain
-        run: moon version
+        run: |
+          moon version --all
+          moonc -v
 
       - name: Format
         run: moon fmt --check

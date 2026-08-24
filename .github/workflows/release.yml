@@ -20,7 +20,8 @@ jobs:
           echo "$HOME/.moon/bin" >> "$GITHUB_PATH"
       - name: Validate metadata and build
         run: |
-          moon version
+          moon version --all
+          moonc -v
           moon fmt --check
           moon check --deny-warn
           moon test --deny-warn
